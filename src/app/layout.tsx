@@ -5,6 +5,8 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Script from "next/script";
+import AdSense from "./components/AdSense";
+import AdBanner from "./components/Adbanner";
 
 // Fuentes
 const geistSans = Geist({
@@ -76,14 +78,10 @@ export default function RootLayout({
   return (
     <html lang="es">
 
-     {/* Script global de AdSense */}
-        <Script
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9559644099127130"
-          strategy="afterInteractive"
-          crossOrigin="anonymous"
-        />
+<head>
 
-
+  <AdSense pid="pub-9559644099127130"></AdSense>
+</head>
       
       <body
       
@@ -103,31 +101,13 @@ export default function RootLayout({
               <h2 className="text-xl font-bold mb-4 text-neutral-200">Publicidad</h2>
               <div className="space-y-6">
                 {/* Bloque de anuncio 1 */}
-                <ins
-                  className="adsbygoogle"
-                  style={{ display: "block", width: 300, height: 250 }}
-                  data-ad-client="ca-pub-9559644099127130"
-                  data-ad-slot="6890573251"
-                  data-ad-format="auto"
-                  data-full-width-responsive="true"
-                ></ins>
-                {/* Inicializa anuncio */}
-                <Script id="ads-init-1" strategy="afterInteractive">
-                  {`(adsbygoogle = window.adsbygoogle || []).push({});`}
-                </Script>
 
-                {/* Bloque de anuncio 2 */}
-                <ins
-                  className="adsbygoogle"
-                  style={{ display: "block", width: 300, height: 250 }}
-                  data-ad-client="ca-pub-9559644099127130"
-                  data-ad-slot="6890573251"
-                  data-ad-format="auto"
-                  data-full-width-responsive="true"
-                ></ins>
-                <Script id="ads-init-2" strategy="afterInteractive">
-                  {`(adsbygoogle = window.adsbygoogle || []).push({});`}
-                </Script>
+                <AdBanner dataAdFormat="auto"
+                dataFullWidthResponsive={true}
+                dataAdSlot="6890573251"
+
+                ></AdBanner>
+               
               </div>
             </div>
           </aside>
