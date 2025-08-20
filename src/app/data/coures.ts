@@ -43,7 +43,7 @@ export const courses: Course[] = [
     image: "https://images.unsplash.com/photo-1555949963-aa79dcee981c",
     tags: ["Next.js", "React", "SSR"],
     affiliateUrl: "https://ejemplo.com/nextjs",
-    content: "Contenido completo del curso de Next.js...",
+    content: "Contenido completo del curso de Next.js",
     instructor: "Carlos Méndez",
     lessons: 38,
     price: "$59.99",
