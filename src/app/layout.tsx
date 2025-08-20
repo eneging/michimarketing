@@ -76,17 +76,15 @@ export default function RootLayout({
   return (
     <html lang="es">
 
-     <head>
+     {/* Script global de AdSense */}
+        <Script
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9559644099127130"
+          strategy="afterInteractive"
+          crossOrigin="anonymous"
+        />
 
-     \<Script
-  src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9559644099127130"
-  strategy="afterInteractive"
-  crossOrigin="anonymous"
-  async
-/>
 
-<meta name="google-adsense-account" content="ca-pub-9559644099127130"></meta>
-     </head>
+      
       <body
       
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white font-sans`}
@@ -99,17 +97,37 @@ export default function RootLayout({
         
         className="flex flex-col lg:flex-row max-w-screen-2xl mx-auto px-6 py-16 gap-8">
           {/* Sidebar Izquierdo (Publicidad) */}
-          <aside className="hidden lg:block w-64">
+          
+ <aside className="hidden lg:block w-64">
             <div className="sticky top-28 bg-neutral-900 rounded-xl border border-neutral-800 p-6 shadow-sm">
               <h2 className="text-xl font-bold mb-4 text-neutral-200">Publicidad</h2>
               <div className="space-y-6">
-                {/* Slot para Google AdSense o banners */}
-                <div className="h-40 bg-gradient-to-br from-neutral-900 to-neutral-800 rounded-lg flex items-center justify-center text-neutral-500 text-sm border border-neutral-800 hover:border-neutral-700 transition-colors">
-                  Ad 300x250
-                </div>
-                <div className="h-40 bg-gradient-to-br from-neutral-900 to-neutral-800 rounded-lg flex items-center justify-center text-neutral-500 text-sm border border-neutral-800 hover:border-neutral-700 transition-colors">
-                  Ad 300x250
-                </div>
+                {/* Bloque de anuncio 1 */}
+                <ins
+                  className="adsbygoogle"
+                  style={{ display: "block", width: 300, height: 250 }}
+                  data-ad-client="ca-pub-9559644099127130"
+                  data-ad-slot="6890573251"
+                  data-ad-format="auto"
+                  data-full-width-responsive="true"
+                ></ins>
+                {/* Inicializa anuncio */}
+                <Script id="ads-init-1" strategy="afterInteractive">
+                  {`(adsbygoogle = window.adsbygoogle || []).push({});`}
+                </Script>
+
+                {/* Bloque de anuncio 2 */}
+                <ins
+                  className="adsbygoogle"
+                  style={{ display: "block", width: 300, height: 250 }}
+                  data-ad-client="ca-pub-9559644099127130"
+                  data-ad-slot="6890573251"
+                  data-ad-format="auto"
+                  data-full-width-responsive="true"
+                ></ins>
+                <Script id="ads-init-2" strategy="afterInteractive">
+                  {`(adsbygoogle = window.adsbygoogle || []).push({});`}
+                </Script>
               </div>
             </div>
           </aside>
