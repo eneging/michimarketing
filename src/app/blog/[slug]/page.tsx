@@ -3,18 +3,17 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
-interface Props {
+interface BlogPageProps {
   params: { slug: string };
 }
 
-export default function BlogPostPage({ params }: Props) {
+export default function BlogPostPage({ params }: BlogPageProps) {
   const post = blogPosts.find((p) => p.slug === params.slug);
 
   if (!post) return notFound();
 
-  // Encontrar posts relacionados
-  const relatedPosts = post.relatedPosts 
-    ? blogPosts.filter(p => post.relatedPosts?.includes(p.slug))
+  const relatedPosts = post.relatedPosts
+    ? blogPosts.filter((p) => post.relatedPosts?.includes(p.slug))
     : [];
 
   return (
@@ -28,15 +27,15 @@ export default function BlogPostPage({ params }: Props) {
             </span>
           </div>
         )}
-        
+
         <h1 className="text-4xl md:text-5xl font-bold text-center mb-6 text-gray-900">
           {post.title}
         </h1>
-        
+
         <p className="text-xl text-gray-800 text-center mb-8 max-w-3xl mx-auto">
           {post.excerpt}
         </p>
-        
+
         <div className="flex flex-col md:flex-row items-center justify-between gap-4 mb-8">
           <div className="flex items-center">
             {post.authorImage && (
@@ -57,7 +56,7 @@ export default function BlogPostPage({ params }: Props) {
               )}
             </div>
           </div>
-          
+
           <div className="text-sm text-gray-800">
             <span>
               {new Date(post.date).toLocaleDateString("es-PE", {
@@ -90,7 +89,7 @@ export default function BlogPostPage({ params }: Props) {
       )}
 
       {/* Contenido del artículo */}
-      <div 
+      <div
         className="prose prose-lg max-w-none mb-12 text-gray-950"
         dangerouslySetInnerHTML={{ __html: post.content }}
       />
@@ -115,17 +114,25 @@ export default function BlogPostPage({ params }: Props) {
       {/* Posts relacionados */}
       {relatedPosts.length > 0 && (
         <div className="border-t pt-12">
-          <h3 className="text-2xl font-bold text-gray-900 mb-6">Artículos relacionados</h3>
+          <h3 className="text-2xl font-bold text-gray-900 mb-6">
+            Artículos relacionados
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {relatedPosts.map((relatedPost) => (
-              <Link 
-                key={relatedPost.slug} 
+              <Link
+                key={relatedPost.slug}
                 href={`/blog/${relatedPost.slug}`}
                 className="block p-4 border rounded-lg hover:shadow-md transition-shadow"
               >
-                <h4 className="font-semibold text-lg mb-2 text-gray-900">{relatedPost.title}</h4>
-                <p className="text-gray-800 text-sm mb-3">{relatedPost.excerpt}</p>
-                <span className="text-blue-600 text-sm font-medium">Leer más →</span>
+                <h4 className="font-semibold text-lg mb-2 text-gray-900">
+                  {relatedPost.title}
+                </h4>
+                <p className="text-gray-800 text-sm mb-3">
+                  {relatedPost.excerpt}
+                </p>
+                <span className="text-blue-600 text-sm font-medium">
+                  Leer más →
+                </span>
               </Link>
             ))}
           </div>
@@ -134,7 +141,9 @@ export default function BlogPostPage({ params }: Props) {
 
       {/* Compartir */}
       <div className="mt-12 pt-8 border-t">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Compartir este artículo</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">
+          Compartir este artículo
+        </h3>
         <div className="flex gap-3">
           <button className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm">
             <span>Facebook</span>
