@@ -85,6 +85,7 @@ export default function RootLayout({
   async
 />
 
+<meta name="google-adsense-account" content="ca-pub-9559644099127130"></meta>
      </head>
       <body
       
