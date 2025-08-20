@@ -59,3 +59,5 @@ export type Tool = {
   communityLinks?: { name: string; url: string }[];
   faq?: { question: string; answer: string }[];
 };
+
+
