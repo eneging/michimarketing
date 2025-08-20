@@ -2,8 +2,8 @@
 
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { tools } from "../../data/tools";
-import { categories } from "../../data/Categories";
+import { tools } from "../data/tools";
+import { categories } from "../data/Categories";
 
 // Función para resaltar coincidencias
 function highlight(text: string, query: string) {
