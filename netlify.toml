@@ -1,5 +1,4 @@
 [build]
-  base = "src"          # si tu package.json está en src
   publish = ".next"
   command = "npm run build"
 
