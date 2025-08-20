@@ -1,23 +1,30 @@
-// src/app/blog/[slug]/page.tsx
 import { blogPosts } from "../../data/blogPosts";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
+interface BlogPageParams {
+  slug: string;
+}
+
+interface BlogPageProps {
+  params: Promise<BlogPageParams>; // params ahora es Promise
+}
+
 export const dynamic = "force-static";
 
-export default async function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = blogPosts.find((p) => p.slug === params.slug);
+export default async function BlogPostPage({ params }: BlogPageProps) {
+  const { slug } = await params;
+
+  const post = blogPosts.find((p) => p.slug === slug);
   if (!post) return notFound();
 
-  // Posts relacionados
   const relatedPosts = post.relatedPosts
     ? blogPosts.filter((p) => post.relatedPosts?.includes(p.slug))
     : [];
 
   return (
     <article className="max-w-4xl mx-auto py-8 px-4 md:px-6 bg-white">
-      {/* Título y fecha */}
       <header className="mb-6">
         <h1 className="text-4xl font-bold text-gray-900">{post.title}</h1>
         <p className="mt-2 text-sm text-gray-500">
@@ -25,10 +32,9 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         </p>
       </header>
 
-      {/* Imagen destacada */}
-      {post.image && (
+      {post.featuredImage && (
         <Image
-          src={post.image}
+          src={post.featuredImage}
           alt={post.title}
           width={1200}
           height={600}
@@ -36,13 +42,11 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
         />
       )}
 
-      {/* Contenido del post */}
       <div
         className="prose lg:prose-xl"
         dangerouslySetInnerHTML={{ __html: post.content }}
       />
 
-      {/* Posts relacionados */}
       {relatedPosts.length > 0 && (
         <section className="mt-10">
           <h2 className="text-2xl font-semibold mb-4">Posts relacionados</h2>
@@ -61,7 +65,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
   );
 }
 
-// Generación estática de rutas dinámicas
+// Generación estática
 export async function generateStaticParams() {
   return blogPosts.map((post) => ({
     slug: post.slug,

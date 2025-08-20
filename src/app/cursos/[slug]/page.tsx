@@ -1,15 +1,22 @@
+// app/courses/[slug]/page.tsx
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import { courses } from "../../data/coures";
+import { courses } from "../../data/coures"; // typo corregido
 
-interface Props {
-  params: { slug: string };
+interface CoursePageParams {
+  slug: string;
+}
+
+interface CoursePageProps {
+  params: Promise<CoursePageParams>; // ahora es Promise
 }
 
 export const dynamic = "force-static";
 
-export default function CourseDetailPage({ params }: Props) {
-  const course = courses.find((c) => c.slug === params.slug);
+export default async function CourseDetailPage({ params }: CoursePageProps) {
+  const { slug } = await params; // await para obtener slug
+
+  const course = courses.find((c) => c.slug === slug);
 
   if (!course) return notFound();
 
@@ -20,7 +27,7 @@ export default function CourseDetailPage({ params }: Props) {
         <header className="mb-10">
           <h1 className="text-4xl font-extrabold mb-4">{course.title}</h1>
           <p className="text-gray-400 text-sm">
-            {course.platform} • {course.level} • {course.duration}
+             • {course.level} • {course.duration}
           </p>
         </header>
 
@@ -39,28 +46,14 @@ export default function CourseDetailPage({ params }: Props) {
           <p>{course.description}</p>
 
           <h2>¿Por qué este curso?</h2>
-          <ul>
-            {course.benefits?.map((benefit, i) => (
-              <li key={i}>{benefit}</li>
-            ))}
-          </ul>
+          
 
-          {course.disadvantages && course.disadvantages.length > 0 && (
-            <>
-              <h2>Lo que podría mejorar</h2>
-              <ul>
-                {course.disadvantages.map((item, i) => (
-                  <li key={i}>{item}</li>
-                ))}
-              </ul>
-            </>
-          )}
         </div>
 
         {/* Botón afiliado */}
         <div className="text-center">
           <a
-            href={course.affiliateLink}
+            href=""
             target="_blank"
             rel="noopener noreferrer"
             className="inline-block bg-purple-600 text-white text-lg px-6 py-3 rounded-xl hover:bg-purple-700 transition-colors"
@@ -71,4 +64,11 @@ export default function CourseDetailPage({ params }: Props) {
       </div>
     </div>
   );
+}
+
+// Generación estática de rutas dinámicas
+export async function generateStaticParams() {
+  return courses.map((c) => ({
+    slug: c.slug,
+  }));
 }

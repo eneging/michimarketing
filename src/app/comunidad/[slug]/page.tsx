@@ -3,13 +3,20 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import { communities } from "../../data/communities";
 
-interface Props {
-  params: { slug: string };
+interface CommunityPageParams {
+  slug: string;
 }
+
+interface CommunityPageProps {
+  params: Promise<CommunityPageParams>; // ahora es Promise
+}
+
 export const dynamic = "force-static";
 
-export default function CommunityDetailPage({ params }: Props) {
-  const community = communities.find((c) => c.slug === params.slug);
+export default async function CommunityDetailPage({ params }: CommunityPageProps) {
+  const { slug } = await params; // await para obtener slug
+
+  const community = communities.find((c) => c.slug === slug);
 
   if (!community) return notFound();
 
@@ -45,4 +52,11 @@ export default function CommunityDetailPage({ params }: Props) {
       </div>
     </div>
   );
+}
+
+// Generación de rutas estáticas
+export async function generateStaticParams() {
+  return communities.map((c) => ({
+    slug: c.slug,
+  }));
 }

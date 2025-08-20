@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Menu, X, Search, Star, Sparkles, ChevronDown } from "lucide-react";
+import { Menu, X, Search, Sparkles, ChevronDown } from "lucide-react";
 import { tools } from "../data/tools";
 import { categories } from "../data/Categories";
 
@@ -35,6 +35,8 @@ export default function Navbar() {
   const [focused, setFocused] = useState(false);
   const [activeIndex, setActiveIndex] = useState<number>(-1);
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
+  
+
   const router = useRouter();
 
   // ------------------------------------------------
@@ -137,7 +139,7 @@ export default function Navbar() {
   // ------------------------------------------------
   // Sub-componente para la lista de sugerencias
   // ------------------------------------------------
-  const SuggestionList = ({ inMobile = false }: { inMobile?: boolean }) => (
+  const SuggestionList = () => (
     <>
       {focused && query && allSuggestions.length > 0 && (
         <div
@@ -398,7 +400,7 @@ export default function Navbar() {
                 className="bg-transparent outline-none flex-grow text-gray-200 placeholder-gray-500 text-sm"
               />
             </form>
-            <SuggestionList inMobile />
+            <SuggestionList />
           </div>
 
           <div className="space-y-1">

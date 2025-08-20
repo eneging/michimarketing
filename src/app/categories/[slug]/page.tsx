@@ -1,102 +1,176 @@
 // app/categories/[slug]/page.tsx
-import { categories } from "../../data/Categories";
+import { Wand2, Megaphone, Palette, BarChart3, Users, MessageSquare, Camera, Code, DollarSign, Mail } from "lucide-react";
 import { tools } from "../../data/tools";
-import ToolCard from "../../components/ToolCard";
-import { Wand2, Megaphone, Palette, Mic2, Star } from "lucide-react";
+import { categories } from "../../data/Categories";
 import Link from "next/link";
+import { notFound } from "next/navigation";
+import Image from "next/image";
 
-interface CategoryPageProps {
-  params: {
-    slug: string;
-  };
-}
-
-export const dynamic = "force-static";
+// Definimos el tipo para el icono como React.ReactNode
+import type { ReactNode } from 'react';
 
 // Íconos dinámicos para categorías
-const categoryIcons: { [key: string]: JSX.Element } = {
+const categoryIcons: { [key: string]: ReactNode } = {
   "ai-tools": <Wand2 className="w-12 h-12 text-blue-500" />,
   seo: <Megaphone className="w-12 h-12 text-red-500" />,
   "content-marketing": <Palette className="w-12 h-12 text-purple-500" />,
-  "social-media": <Mic2 className="w-12 h-12 text-green-500" />,
-  default: <Star className="w-12 h-12 text-yellow-500" />,
+  analytics: <BarChart3 className="w-12 h-12 text-green-500" />,
+  "social-media": <Users className="w-12 h-12 text-pink-500" />,
+  "customer-support": <MessageSquare className="w-12 h-12 text-yellow-500" />,
+  "video-photo": <Camera className="w-12 h-12 text-indigo-500" />,
+  development: <Code className="w-12 h-12 text-orange-500" />,
+  finance: <DollarSign className="w-12 h-12 text-emerald-500" />,
+  email: <Mail className="w-12 h-12 text-cyan-500" />,
 };
 
-// Función para normalizar strings (minúsculas y reemplazo de espacios)
-const normalize = (str: string | undefined) =>
-  (str || "").toLowerCase().replace(/\s+/g, "-");
+// Tipos para los parámetros
+interface CategoryPageParams {
+  slug: string;
+}
+
+interface CategoryPageProps {
+  params: Promise<CategoryPageParams>;
+}
 
 export default async function CategoryPage({ params }: CategoryPageProps) {
-  const category = categories.find((c) => normalize(c.slug) === normalize(params.slug));
-
+  const { slug } = await params;
+  
+  // Encontrar la categoría
+  const category = categories.find((c) => c.slug === slug);
+  
   if (!category) {
-    return (
-      <main className="max-w-6xl mx-auto px-6 py-10 text-center">
-        <h1 className="text-2xl font-bold mt-10 text-red-600">
-          Category not found
-        </h1>
-        <Link
-          href="/"
-          className="mt-6 inline-block px-6 py-2 bg-gray-800 text-white rounded-lg hover:bg-gray-700 transition"
-        >
-          Back to Home
-        </Link>
-      </main>
-    );
+    notFound();
   }
-
-  // Filtramos herramientas usando normalize
-  const categoryTools = tools.filter(
-    (t) => normalize(t.category) === normalize(category.slug)
-  );
-  const icon = categoryIcons[normalize(category.slug)] || categoryIcons.default;
+  
+  // Filtrar herramientas por categoría
+  const categoryTools = tools.filter((tool) => tool.category === category.name);
+  
+  // Obtener el icono para la categoría o usar uno por defecto
+  const categoryIcon = categoryIcons[slug] || <Wand2 className="w-12 h-12 text-gray-500" />;
 
   return (
-    <main className="max-w-7xl mx-auto px-6 py-12">
-      {/* Header de categoría */}
-      <section className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-blue-50 to-purple-50 p-10 mb-12 shadow-md">
-        <div className="flex items-center gap-6">
-          <div className="bg-white shadow-md p-4 rounded-2xl">{icon}</div>
-          <div>
-            <h1 className="text-4xl font-bold text-gray-900">{category.name}</h1>
-            <p className="mt-2 text-gray-600 max-w-2xl">
-              {category.description}
-            </p>
+    <div className="max-w-6xl mx-auto px-6 py-10">
+      {/* Header de la categoría */}
+      <div className="text-center mb-12">
+        <div className="flex justify-center mb-4">
+          <div className="p-4 bg-gray-900 rounded-2xl border border-gray-800">
+            {categoryIcon}
           </div>
         </div>
-        <div className="absolute top-0 right-0 w-40 h-40 bg-blue-200 opacity-30 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-32 h-32 bg-purple-200 opacity-30 rounded-full blur-3xl"></div>
-      </section>
+        <h1 className="text-4xl font-bold text-white mb-4">{category.name}</h1>
+        <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          {category.description}
+        </p>
+      </div>
 
-      {/* Herramientas */}
-      {categoryTools.length > 0 ? (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {categoryTools.map((tool) => (
-            <ToolCard
-              key={tool.slug}
-              slug={tool.slug}
-              name={tool.name}
-              description={tool.description}
-              logo={tool.logo}
-              tags={tool.tags}
-              rating={tool.rating}
-            />
-          ))}
+      {/* Estadísticas */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+        <div className="bg-gray-900/50 border border-gray-800 rounded-2xl p-6 text-center">
+          <div className="text-3xl font-bold text-white mb-2">{categoryTools.length}</div>
+          <div className="text-gray-400">Herramientas</div>
         </div>
-      ) : (
-        <div className="flex flex-col items-center justify-center py-20 text-gray-500">
-          <Star className="w-12 h-12 mb-3 text-gray-400" />
-          <p className="text-lg font-medium mb-4">
-            No tools available in this category yet.
-          </p>
+        <div className="bg-gray-900/50 border border-gray-800 rounded-2xl p-6 text-center">
+          <div className="text-3xl font-bold text-white mb-2">
+            {Math.round(categoryTools.reduce((acc, tool) => acc + (tool.rating || 0), 0) / categoryTools.length || 0)}
+          </div>
+          <div className="text-gray-400">Rating Promedio</div>
+        </div>
+        <div className="bg-gray-900/50 border border-gray-800 rounded-2xl p-6 text-center">
+          <div className="text-3xl font-bold text-white mb-2">
+            {new Set(categoryTools.flatMap(tool => tool.tags || [])).size}
+          </div>
+          <div className="text-gray-400">Tags Únicos</div>
+        </div>
+      </div>
+
+      {/* Lista de herramientas */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {categoryTools.map((tool) => (
           <Link
-            href="/categories"
-            className="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"
+            key={tool.slug}
+            href={`/tools/${tool.slug}`}
+            className="bg-gray-900/50 border border-gray-800 rounded-2xl p-6 hover:border-gray-700 hover:bg-gray-900 transition-all duration-300 group"
           >
-            Explore All Categories
+            <div className="flex items-center gap-4 mb-4">
+              {tool.logo && (
+                <div className="w-12 h-12 bg-gray-800 rounded-xl border border-gray-700 flex items-center justify-center">
+                  <Image
+                    src={tool.logo}
+                    alt={tool.name}
+                    width={40}
+                    height={40}
+                    className="w-10 h-10 object-contain"
+                  />
+                </div>
+              )}
+              <div>
+                <h3 className="font-semibold text-white group-hover:text-blue-400 transition-colors">
+                  {tool.name}
+                </h3>
+                {tool.rating && (
+                  <div className="flex items-center gap-1 mt-1">
+                    <div className="text-yellow-400 text-sm">★</div>
+                    <span className="text-gray-400 text-sm">{tool.rating}</span>
+                  </div>
+                )}
+              </div>
+            </div>
+            <p className="text-gray-400 text-sm line-clamp-2">
+              {tool.description}
+            </p>
+            {tool.tags && tool.tags.length > 0 && (
+              <div className="flex flex-wrap gap-1 mt-4">
+                {tool.tags.slice(0, 3).map((tag) => (
+                  <span
+                    key={tag}
+                    className="px-2 py-1 bg-gray-800 text-gray-300 text-xs rounded-full border border-gray-700"
+                  >
+                    {tag}
+                  </span>
+                ))}
+                {tool.tags.length > 3 && (
+                  <span className="px-2 py-1 text-gray-500 text-xs">
+                    +{tool.tags.length - 3}
+                  </span>
+                )}
+              </div>
+            )}
+          </Link>
+        ))}
+      </div>
+
+      {/* Mensaje si no hay herramientas */}
+      {categoryTools.length === 0 && (
+        <div className="text-center py-12">
+          <div className="text-gray-500 text-lg mb-4">
+            No hay herramientas en esta categoría todavía.
+          </div>
+          <Link
+            href="/tools"
+            className="text-blue-400 hover:text-blue-300 transition-colors"
+          >
+            Ver todas las herramientas →
           </Link>
         </div>
       )}
-    </main>
+    </div>
   );
+}
+
+// Generación estática de rutas
+export async function generateStaticParams() {
+  return categories.map((category) => ({
+    slug: category.slug,
+  }));
+}
+
+// Metadata para SEO
+export async function generateMetadata({ params }: CategoryPageProps) {
+  const { slug } = await params;
+  const category = categories.find((c) => c.slug === slug);
+  
+  return {
+    title: category ? `${category.name} - Herramientas de Marketing` : "Categoría no encontrada",
+    description: category?.description || "Explora herramientas de marketing digital",
+  };
 }

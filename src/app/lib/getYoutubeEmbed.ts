@@ -25,7 +25,8 @@ export function getYoutubeEmbed(url: string): string {
 
     // Si no coincide con nada, devuelvo el original
     return url;
-  } catch (e) {
+  } catch {
+    // Eliminamos el parámetro 'e' ya que no se usa
     return url;
   }
 }

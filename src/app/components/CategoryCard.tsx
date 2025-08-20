@@ -1,15 +1,17 @@
 import Link from "next/link";
 import { Star, Wand2, Palette, Mic2, Megaphone, ArrowRight, Sparkles } from "lucide-react";
+import { ReactNode } from "react"; // Importamos ReactNode
 
 interface CategoryCardProps {
   name: string;
   slug: string;
   description: string;
-  toolCount?: number; // Nuevo prop opcional para mostrar cantidad de herramientas
+  icon?: ReactNode; // Cambiamos a ReactNode
+  toolCount?: number;
 }
 
 // Map de íconos por slug con gradientes
-const categoryIcons: { [key: string]: { icon: JSX.Element, gradient: string } } = {
+const categoryIcons: { [key: string]: { icon: ReactNode, gradient: string } } = {
   "ai-tools": { 
     icon: <Wand2 className="w-8 h-8" />, 
     gradient: "from-blue-500 to-cyan-500" 
@@ -32,8 +34,15 @@ const categoryIcons: { [key: string]: { icon: JSX.Element, gradient: string } } 
   },
 };
 
-export default function CategoryCard({ name, slug, description, toolCount }: CategoryCardProps) {
+export default function CategoryCard({ 
+  name, 
+  slug, 
+  description, 
+  icon, // Recibimos la prop icon
+  toolCount 
+}: CategoryCardProps) {
   const categoryData = categoryIcons[slug] || categoryIcons.default;
+  const displayIcon = icon || categoryData.icon; // Usamos el icono pasado o el por defecto
 
   return (
     <Link href={`/categories/${slug}`}>
@@ -58,10 +67,10 @@ export default function CategoryCard({ name, slug, description, toolCount }: Cat
 
         {/* Contenido principal */}
         <div className="relative z-10">
-          {/* Icono con fondo gradiente */}
+          {/* Icono con fondo gradiente - Usamos displayIcon en lugar de categoryData.icon */}
           <div className={`inline-flex items-center justify-center p-3 rounded-xl bg-gradient-to-br ${categoryData.gradient} mb-5 shadow-lg`}>
             <div className="text-white">
-              {categoryData.icon}
+              {displayIcon}
             </div>
           </div>
 

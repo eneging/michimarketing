@@ -9,8 +9,6 @@ import {
   PlayCircle,
   ChevronRight,
   Tag,
-  Sparkles,
-  Zap,
   Heart,
   Bookmark,
 } from "lucide-react";
