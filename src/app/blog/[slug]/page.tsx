@@ -4,21 +4,13 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
 
-interface BlogPageParams {
-  slug: string;
-}
-
-interface BlogPageProps {
-  params: BlogPageParams;
-}
-
 export const dynamic = "force-static";
 
-export default async function BlogPostPage({ params }: BlogPageProps) {
+export default async function BlogPostPage({ params }: { params: { slug: string } }) {
   const post = blogPosts.find((p) => p.slug === params.slug);
   if (!post) return notFound();
 
-  // ✅ Posts relacionados
+  // Posts relacionados
   const relatedPosts = post.relatedPosts
     ? blogPosts.filter((p) => post.relatedPosts?.includes(p.slug))
     : [];
@@ -69,7 +61,7 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
   );
 }
 
-// ✅ Generación estática de rutas dinámicas
+// Generación estática de rutas dinámicas
 export async function generateStaticParams() {
   return blogPosts.map((post) => ({
     slug: post.slug,
