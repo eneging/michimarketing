@@ -12,6 +12,8 @@ interface BlogPageProps {
   params: BlogPageParams;
 }
 
+export const dynamic = "force-static";
+
 export default async function BlogPostPage({ params }: BlogPageProps) {
   const post = blogPosts.find((p) => p.slug === params.slug);
   if (!post) return notFound();

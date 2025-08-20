@@ -12,6 +12,8 @@ interface ToolPageProps {
   };
 }
 
+export const dynamic = "force-static";
+
 export default async function ToolPage({ params }: ToolPageProps) {
   const tool = tools.find((t) => t.slug === params.slug);
 

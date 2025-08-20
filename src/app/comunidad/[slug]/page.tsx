@@ -6,6 +6,7 @@ import { communities } from "../../data/communities";
 interface Props {
   params: { slug: string };
 }
+export const dynamic = "force-static";
 
 export default function CommunityDetailPage({ params }: Props) {
   const community = communities.find((c) => c.slug === params.slug);

@@ -6,6 +6,8 @@ interface Props {
   params: { slug: string };
 }
 
+export const dynamic = "force-static";
+
 export default function CourseDetailPage({ params }: Props) {
   const course = courses.find((c) => c.slug === params.slug);
 

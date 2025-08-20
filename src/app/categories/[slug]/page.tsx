@@ -11,6 +11,8 @@ interface CategoryPageProps {
   };
 }
 
+export const dynamic = "force-static";
+
 // Íconos dinámicos para categorías
 const categoryIcons: { [key: string]: JSX.Element } = {
   "ai-tools": <Wand2 className="w-12 h-12 text-blue-500" />,
