@@ -58,12 +58,12 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* 📢 Espacio Publicitario / Newsletter */}
+      {/* 📢 Espacio Publicitario / Newsletter 
       <div className="max-w-5xl mx-auto px-6 mb-10">
         <div className="w-full h-28 bg-gray-800 border border-dashed border-gray-600 flex items-center justify-center rounded-lg">
           <span className="text-gray-500">[Publicidad o Newsletter aquí]</span>
         </div>
-      </div>
+      </div>*/}
 
       {/* Línea final */}
       <div className="border-t border-gray-800 py-5 text-center text-sm text-gray-500">

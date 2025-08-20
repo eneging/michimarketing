@@ -4,9 +4,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
-import Script from "next/script";
+//import Script from "next/script";
 import AdSense from "./components/AdSense";
-import AdBanner from "./components/Adbanner";
+//import AdBanner from "./components/Adbanner";
 
 // Fuentes
 const geistSans = Geist({
@@ -96,26 +96,22 @@ export default function RootLayout({
         className="flex flex-col lg:flex-row max-w-screen-2xl mx-auto px-6 py-16 gap-8">
           {/* Sidebar Izquierdo (Publicidad) */}
           
- <aside className="hidden lg:block w-64">
-            <div className="sticky top-28 bg-neutral-900 rounded-xl border border-neutral-800 p-6 shadow-sm">
+ {/*  <aside className="hidden lg:block w-64">
+          <div className="sticky top-28 bg-neutral-900 rounded-xl border border-neutral-800 p-6 shadow-sm">
               <h2 className="text-xl font-bold mb-4 text-neutral-200">Publicidad</h2>
               <div className="space-y-6">
-                {/* Bloque de anuncio 1 */}
+                 Bloque de anuncio 1 */}
 
-                <AdBanner dataAdFormat="auto"
-                dataFullWidthResponsive={true}
-                dataAdSlot="6890573251"
-
-                ></AdBanner>
                
+            {/*    
               </div>
             </div>
           </aside>
 
-          {/* Contenido central */}
+          Contenido central */}
           <main className="flex-1 min-h-screen">{children}</main>
 
-          {/* Sidebar Derecho (Recomendados) */}
+          {/* Sidebar Derecho (Recomendados) 
           <aside className="hidden lg:block w-64">
             <div className="sticky top-28 bg-neutral-900 rounded-xl border border-neutral-800 p-6 shadow-sm">
               <h2 className="text-xl font-bold mb-4 text-neutral-200">Recomendados</h2>
@@ -134,7 +130,9 @@ export default function RootLayout({
                 </li>
               </ul>
             </div>
-          </aside>
+          </aside>*/}
+
+
         </div>
 
         <Footer></Footer>
