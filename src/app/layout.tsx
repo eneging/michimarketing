@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 //import Script from "next/script";
 import AdSense from "./components/AdSense";
+import BottomNav from "./components/BottomNav";
 //import AdBanner from "./components/Adbanner";
 
 // Fuentes
@@ -134,7 +135,7 @@ export default function RootLayout({
 
 
         </div>
-
+<BottomNav></BottomNav>
         <Footer></Footer>
       </body>
     </html>
