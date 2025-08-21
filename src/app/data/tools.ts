@@ -640,7 +640,7 @@ export const tools: Tool[] = [
     "category": "Content Creation Tools",
     "description": "DALL-E 3 es un modelo de IA de OpenAI que crea imágenes realistas y artísticas a partir de descripciones en lenguaje natural. Entiende el contexto y los matices con mucha más precisión que sus predecesores, permitiendo traducir ideas complejas en imágenes de alta calidad. Está integrado nativamente en ChatGPT para facilitar el proceso de 'prompting'.",
     "website": "https://openai.com/dall-e-3",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/0e/DALLE_3_logo.png/1200px-DALLE_3_logo.png",
+    "logo": "https://michimarketing.com/imgTools/dall-e-3",
     "tutorialVideo": "https://www.youtube.com/watch?v=o_h_s63aO6w",
     "screenshots": [
       "https://images.openai.com/blob/7923315e-b089-4979-99e2-1a48605e1654/An-illustration-of-an-avocado-sitting-in-a-therapist-s-chair-saying-I-just-feel-so-empty-inside-with-a-pit-sized-hole-in-its-center.-The-therapist-a-spoon-nods-with-empathy..png?trim=0,0,0,0&width=2000",
@@ -913,7 +913,7 @@ export const tools: Tool[] = [
   "description": "Canva is an online design and publishing tool that empowers everyone to create beautiful presentations, social media graphics, videos, posters, and more with easy-to-use templates and AI-powered features.",
   "website": "https://www.canva.com",
   "affiliateLink": "",
-  "logo": "",
+  "logo": "https://michimarketing.com/imgTools/Canva.png",
   "tutorialVideo": "https://www.youtube.com/watch?v=jzWxBuvwuwQ",
   "screenshots": [
     "https://placehold.co/600x400?text=Canva+Screenshot+1",
@@ -2474,7 +2474,7 @@ export const tools: Tool[] = [
   "category": "Marketing Automation",
   "description": "ActiveCampaign es una plataforma integral de automatización de marketing y CRM que permite a las empresas automatizar sus correos electrónicos, gestionar sus listas de contactos, segmentar audiencias y crear experiencias personalizadas para los clientes. Es reconocida por su potente constructor de automatizaciones visuales y sus robustas herramientas de segmentación para campañas de marketing dirigidas.",
   "website": "https://www.activecampaign.com/",
-  "logo": "https://michimarketing.com/imgTools/Mailchimp.pmg",
+  "logo": "https://michimarketing.com/imgTools/ActiveCampaign.png",
   "tutorialVideo": "https://www.youtube.com/watch?v=SjB-m2_fWqg",
   "screenshots": [],
   "pricing": [
@@ -3298,8 +3298,8 @@ export const tools: Tool[] = [
   "slug": "wix-ecommerce",
   "category": "Ecommerce Tools",
   "description": "Wix eCommerce es una solución integrada de comercio electrónico que forma parte del constructor de sitios web Wix. Permite a los usuarios crear, diseñar y gestionar una tienda online con su editor visual de 'arrastrar y soltar' sin necesidad de conocimientos de programación. Es una opción popular para pequeños negocios y creativos que priorizan el diseño y la facilidad de uso.",
-  "website": "https://michimarketing.com/imgTools/WixeCommerce.png",
-  "logo": "",
+  "website": "https://es.wix.com/",
+  "logo": "https://michimarketing.com/imgTools/WixeCommerce.png",
   "tutorialVideo": "https://www.youtube.com/watch?v=SjB-m2_fWqg",
   "screenshots": [],
   "pricing": [
