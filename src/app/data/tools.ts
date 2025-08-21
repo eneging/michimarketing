@@ -7,7 +7,7 @@ export const tools: Tool[] = [
   "category": "AI Tools",
   "description": "Un chatbot de IA conversacional desarrollado por OpenAI. Puede generar texto similar al humano, escribir código, responder preguntas, crear imágenes y mucho más, basado en los modelos de lenguaje GPT-3.5 y GPT-4.",
   "website": "https://chat.openai.com/",
-  "logo": "/src/app/data/imgTools/chatgpt.png",
+  "logo": "https://michimarketing.com/imgTools/chatgpt.png",
   "tutorialVideo": "https://www.youtube.com/watch?v=ru_ltZA6NTM",
   "screenshots": [
     "https://i.ytimg.com/vi/c-g29cxSEiY/maxresdefault.jpg",
@@ -293,7 +293,7 @@ export const tools: Tool[] = [
   "category": "AI Tools",
   "description": "El asistente de IA conversacional de Google, diseñado para ser multimodal y útil. Puede entender y procesar texto, código, imágenes y voz para ayudarte a ser más creativo y productivo. Es el sucesor de Google Bard.",
   "website": "https://gemini.google.com/",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Gemini_logo.svg/1200px-Gemini_logo.svg.png",
+  "logo": "https://michimarketing.com/imgTools/gemini.png",
   "tutorialVideo": "https://www.youtube.com/watch?v=XUm2_7-C1F8",
   "screenshots": [
     "https://storage.googleapis.com/gweb-uniblog-publish-prod/images/gemini_bard_extended.width-1300.jpg",
@@ -462,7 +462,7 @@ export const tools: Tool[] = [
   "category": "AI Tools",
   "description": "Un laboratorio de investigación independiente que produce un programa de inteligencia artificial bajo el mismo nombre que crea imágenes a partir de descripciones textuales. Es conocido por generar imágenes de alta calidad, artísticas y estilizadas.",
   "website": "https://www.midjourney.com/",
-  "logo": "",
+  "logo": "https://michimarketing.com/imgTools/Midjourney.png",
   "tutorialVideo": "https://www.youtube.com/watch?v=5deYUaqwreo",
   "screenshots": [
     "https://cdn.cms-twdigitalassets.com/content/dam/blog-twitter/official-publish-announcements/en_us/products/2023/midjourney/midjourney-1.jpg.twimg.1920.jpg",
@@ -3434,7 +3434,7 @@ export const tools: Tool[] = [
   "category": "SEO Tools",
   "description": "Ahrefs es una suite de herramientas SEO 'todo en uno' que ayuda a los profesionales del marketing a optimizar sus sitios web para los motores de búsqueda. Es ampliamente reconocida por su Site Explorer, una herramienta líder en el análisis de backlinks, y su Keywords Explorer, una de las bases de datos de palabras clave más grandes. Es una herramienta esencial para la investigación de la competencia, la construcción de enlaces y la auditoría de sitios web.",
   "website": "https://ahrefs.com/",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Ahrefs_logo.svg/1200px-Ahrefs_logo.svg.png",
+  "logo": "https://michimarketing.com/imgTools/Ahrefs.png",
   "tutorialVideo": "https://www.youtube.com/watch?v=SjB-m2_fWqg",
   "screenshots": [],
   "pricing": [
@@ -3582,7 +3582,7 @@ export const tools: Tool[] = [
   "category": "SEO Tools",
   "description": "SEMrush es una plataforma 'todo en uno' para marketing digital que ofrece una amplia gama de herramientas para profesionales de SEO, PPC, marketing de contenidos y redes sociales. Es una de las suites de marketing más completas del mercado, permitiendo a los usuarios realizar investigación de la competencia, análisis de palabras clave, auditorías de sitio y gestión de campañas publicitarias.",
   "website": "https://es.semrush.com/",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/SEMrush_logo.svg/1200px-SEMrush_logo.svg.png",
+  "logo": "https://michimarketing.com/imgTools/SEMrush.png",
   "tutorialVideo": "https://www.youtube.com/watch?v=SjB-m2_fWqg",
   "screenshots": [],
   "pricing": [

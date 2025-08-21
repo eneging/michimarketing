@@ -3,7 +3,10 @@ import { NextConfig } from "next";
 const nextConfig: NextConfig = {
  
   images: {
-    domains: ['upload.wikimedia.org', 'images.unsplash.com'],
+    domains: ['upload.wikimedia.org', 'images.unsplash.com', 
+   "michimarketing.com",
+
+    ],
   },
 };
 
