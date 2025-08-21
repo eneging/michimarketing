@@ -4,6 +4,7 @@ export const tools: Tool[] = [
   {
   "name": "ChatGPT",
   "slug": "chatgpt",
+  "image": "https://michimarketing.com/imgTools/chatgpt.png",
   "category": "AI Tools",
   "description": "Un chatbot de IA conversacional desarrollado por OpenAI. Puede generar texto similar al humano, escribir código, responder preguntas, crear imágenes y mucho más, basado en los modelos de lenguaje GPT-3.5 y GPT-4.",
   "website": "https://chat.openai.com/",

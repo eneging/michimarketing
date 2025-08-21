@@ -5,6 +5,7 @@ export type Tool = {
   description: string;
   website: string;
   logo?: string;
+  image?: string;
   tutorialVideo?: string;
   screenshots?: string[];
   pricing?: {

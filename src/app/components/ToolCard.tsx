@@ -49,6 +49,8 @@ export default function ToolCard({
   const [showVideo, setShowVideo] = useState(false);
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
+  const [imageError, setImageError] = useState(false);
+  const [logoError, setLogoError] = useState(false);
 
   const reviewsCount = reviews?.length ?? 0;
 
@@ -139,17 +141,21 @@ export default function ToolCard({
 
       {/* Media (imagen o placeholder) */}
       <div className="relative h-44 w-full overflow-hidden rounded-t-2xl">
-        {image ? (
+        {logo && !imageError ? (
           <Image
-            src={image}
+            src={logo}
             alt={name}
-            fill
-            sizes="(max-width: 768px) 100vw, 33vw"
+         width={400}
+  height={200}
+
             className="object-cover transition-transform duration-700 group-hover:scale-110"
             priority={false}
+            onError={() => setImageError(true)}
           />
         ) : (
-          <div className="h-full w-full bg-gradient-to-br from-indigo-900/40 via-blue-900/40 to-cyan-900/40" />
+          <div className="h-full w-full bg-gradient-to-br from-indigo-900/40 via-blue-900/40 to-cyan-900/40 flex items-center justify-center">
+            <span className="text-gray-500 text-sm font-medium">{name.charAt(0).toUpperCase()}</span>
+          </div>
         )}
 
         {/* Overlay de imagen */}
@@ -163,7 +169,7 @@ export default function ToolCard({
         )}
 
         {/* Logo chip */}
-        {logo && (
+        {logo && !logoError && (
           <div className="absolute bottom-3 left-3 flex h-12 w-12 items-center justify-center overflow-hidden rounded-xl border border-gray-700/50 bg-gray-900/80 backdrop-blur-sm shadow-lg">
             <Image
               src={logo}
@@ -171,6 +177,7 @@ export default function ToolCard({
               width={48}
               height={48}
               className="object-contain p-1.5"
+              onError={() => setLogoError(true)}
             />
           </div>
         )}
