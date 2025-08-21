@@ -60,23 +60,23 @@ export default function Home() {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
           <select
-            className="w-full md:w-1/4 border rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-500"
+            className="w-full md:w-1/4  border rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-500"
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
           >
-            <option value="">Todas las categorías</option>
+            <option className="text-gray-950" value="">Todas las categorías</option>
             {categories.map((cat) => (
-              <option key={cat.slug} value={cat.slug}>{cat.name}</option>
+              <option className="text-black" key={cat.slug} value={cat.slug}>{cat.name}</option>
             ))}
           </select>
           <select
-            className="w-full md:w-1/4 border rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-500"
+            className="w-full  md:w-1/4 border rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-500"
             value={selectedPrice}
             onChange={(e) => setSelectedPrice(e.target.value)}
           >
-            <option value="">Todos los planes</option>
-            <option value="free">Gratis</option>
-            <option value="premium">Premium</option>
+            <option className="text-black"  value="">Todos los planes</option>
+            <option className="text-black"  value="free">Gratis</option>
+            <option className="text-black"  value="premium">Premium</option>
           </select>
         </div>
       </section>

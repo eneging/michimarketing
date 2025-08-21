@@ -1,6 +1,8 @@
 import { Tool } from "../types";
 
 export const tools: Tool[] = [
+
+  ///Chatgpt
   {
   "name": "ChatGPT",
   "slug": "chatgpt",
@@ -171,7 +173,7 @@ export const tools: Tool[] = [
   ]
 },
   
-  
+///Notion  -----------------------------------
   {
     name: "Notion",
     slug: "notion",
@@ -287,7 +289,7 @@ export const tools: Tool[] = [
     integrations: ["Slack", "Google Drive", "Trello"],
     alternatives: ["Evernote", "ClickUp", "Obsidian"],
   },
-
+///Google Gemini ai--------------------------------
 {
   "name": "Google Gemini",
   "slug": "google-gemini",
@@ -457,6 +459,7 @@ export const tools: Tool[] = [
   ]
 },
 
+// Midjourney------------------------------------------------
 {
   "name": "Midjourney",
   "slug": "midjourney",
@@ -633,7 +636,7 @@ export const tools: Tool[] = [
     }
   ]
 },
-
+///DALL-E 3---------------------------------------------------------
 {
   
     "name": "DALL-E 3",
@@ -795,7 +798,7 @@ export const tools: Tool[] = [
     ]
   }
 ,
-
+//Figma --------------------------------------------------
 
  {
   "name": "Figma",
