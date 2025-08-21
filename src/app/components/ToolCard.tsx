@@ -38,7 +38,7 @@ export default function ToolCard({
   description,
   website,
   logo,
-  image,
+  //image,
   rating,
   tags,
   pricing,
