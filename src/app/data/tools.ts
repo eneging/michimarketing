@@ -2474,7 +2474,7 @@ export const tools: Tool[] = [
   "category": "Marketing Automation",
   "description": "ActiveCampaign es una plataforma integral de automatización de marketing y CRM que permite a las empresas automatizar sus correos electrónicos, gestionar sus listas de contactos, segmentar audiencias y crear experiencias personalizadas para los clientes. Es reconocida por su potente constructor de automatizaciones visuales y sus robustas herramientas de segmentación para campañas de marketing dirigidas.",
   "website": "https://www.activecampaign.com/",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/ActiveCampaign_Logo.svg/1200px-ActiveCampaign_Logo.svg.png",
+  "logo": "https://michimarketing.com/imgTools/Mailchimp.pmg",
   "tutorialVideo": "https://www.youtube.com/watch?v=SjB-m2_fWqg",
   "screenshots": [],
   "pricing": [
@@ -2616,7 +2616,7 @@ export const tools: Tool[] = [
   "category": "Marketing Automation",
   "description": "Mailchimp es una plataforma de marketing todo en uno, reconocida mundialmente por su servicio de email marketing. Es la opción preferida de muchos pequeños negocios y creadores por su interfaz intuitiva, su facilidad de uso y su generoso plan gratuito. Además del correo electrónico, ofrece herramientas para crear landing pages, anuncios digitales y automatizaciones simples.",
   "website": "https://mailchimp.com/",
-  "logo": "",
+  "logo": "https://michimarketing.com/imgTools/mailchimp.png",
   "tutorialVideo": "https://www.youtube.com/watch?v=SjB-m2_fWqg",
   "screenshots": [],
   "pricing": [
