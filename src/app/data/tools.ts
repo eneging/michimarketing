@@ -640,7 +640,7 @@ export const tools: Tool[] = [
     "category": "Content Creation Tools",
     "description": "DALL-E 3 es un modelo de IA de OpenAI que crea imágenes realistas y artísticas a partir de descripciones en lenguaje natural. Entiende el contexto y los matices con mucha más precisión que sus predecesores, permitiendo traducir ideas complejas en imágenes de alta calidad. Está integrado nativamente en ChatGPT para facilitar el proceso de 'prompting'.",
     "website": "https://openai.com/dall-e-3",
-    "logo": "https://michimarketing.com/imgTools/dall-e-3",
+    "logo": "https://michimarketing.com/imgTools/dall-e-3.png",
     "tutorialVideo": "https://www.youtube.com/watch?v=o_h_s63aO6w",
     "screenshots": [
       "https://images.openai.com/blob/7923315e-b089-4979-99e2-1a48605e1654/An-illustration-of-an-avocado-sitting-in-a-therapist-s-chair-saying-I-just-feel-so-empty-inside-with-a-pit-sized-hole-in-its-center.-The-therapist-a-spoon-nods-with-empathy..png?trim=0,0,0,0&width=2000",
@@ -1021,7 +1021,7 @@ export const tools: Tool[] = [
     "category": "Content Creation Tools",
     "description": "Stable Diffusion es un modelo de aprendizaje profundo de texto a imagen, lanzado por Stability AI. Su principal característica es que es de código abierto, lo que permite a cualquiera descargarlo, modificarlo y ejecutarlo en su propio hardware. Esto ha fomentado una comunidad masiva que crea modelos personalizados, herramientas y extensiones como ControlNet y LoRAs, ofreciendo un nivel de control y personalización sin igual.",
     "website": "https://stability.ai/stable-diffusion",
-    "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b1/Stable_Diffusion_logo.svg/1200px-Stable_Diffusion_logo.svg.png",
+    "logo": "https://michimarketing.com/imgTools/stable-diffusion.png",
     "tutorialVideo": "https://www.youtube.com/watch?v=Vt1tv_b5Q3Y",
     "screenshots": [
       "https://images.squarespace-cdn.com/content/v1/6213c340453c3f502425276d/929f9512-51a6-48e0-b286-45a7612f827f/StablilityAI_DreamStudio_SavesTheWorld.png",
@@ -1200,7 +1200,7 @@ export const tools: Tool[] = [
   "description": "ElevenLabs es líder en tecnología de voz AI humana y natural que convierte texto en habla con control completo sobre el tono, emoción y entonación. Es usado para voiceovers, audiolibros, asistentes conversacionales y más, soportando múltiples idiomas y voces.",
   "website": "https://elevenlabs.io",
   "affiliateLink": "",
-  "logo": "",
+  "logo": "https://michimarketing.com/imgTools/ElevenLabs.png",
   "tutorialVideo": "https://www.youtube.com/watch?v=z0sD2BvUfM0", 
   "screenshots": [
     "https://elevenlabs.io/assets/screenshots/screenshot1.png",
@@ -1305,7 +1305,7 @@ export const tools: Tool[] = [
     "category": "Content Creation Tools",
     "description": "Jasper AI es una plataforma de inteligencia artificial diseñada principalmente para equipos de marketing y creadores de contenido. Se especializa en la generación de texto de alta calidad, desde artículos de blog y copys para anuncios hasta publicaciones en redes sociales y correos electrónicos. Incluye la función 'Brand Voice' para mantener la consistencia del tono y estilo de una marca. Además, integra 'Jasper Art', una herramienta para generar imágenes a partir de texto.",
     "website": "https://www.jasper.ai/",
-    "logo": "https://assets-global.website-files.com/642608c1962a223869a12962/6433e5510557493201a07353_jasper-logo-purple.svg",
+    "logo": "https://michimarketing.com/imgTools/jasper-ai.png",
     "tutorialVideo": "https://www.youtube.com/watch?v=y2k_S-A-i3c",
     "screenshots": [
       "https://assets-global.website-files.com/642608c1962a223869a12962/64357c2a29ad27649d26a27e_homepage-hero-new-app-UI-p-2000.png",
@@ -1471,7 +1471,7 @@ export const tools: Tool[] = [
   "category": "Content Creation Tools",
   "description": "DaVinci Resolve es una suite de software de postproducción de video completa que combina edición, corrección de color, efectos visuales (VFX), gráficos en movimiento y postproducción de audio en una única herramienta. Es conocida por sus potentes capacidades de corrección de color y su versión gratuita, que es extremadamente robusta.",
   "website": "https://www.blackmagicdesign.com/products/davinciresolve",
-  "logo": "https://www.blackmagicdesign.com/media/logos/davinci-resolve-logo.svg",
+  "logo": "https://michimarketing.com/imgTools/davinci-resolve.png",
   "tutorialVideo": "https://www.youtube.com/watch?v=SjB-m2_fWqg",
   "screenshots": [
     "https://www.blackmagicdesign.com/media/images/products/davinci-resolve/features/feature-1-desktop.jpg",
@@ -1627,7 +1627,7 @@ export const tools: Tool[] = [
   "category": "Content Creation Tools",
   "description": "Final Cut Pro es un software de edición de video no lineal desarrollado por Apple. Es conocido por su interfaz intuitiva y su rendimiento optimizado para el hardware de Mac, lo que lo hace popular entre profesionales y aficionados que buscan una herramienta potente y fluida para la postproducción.",
   "website": "https://www.apple.com/es/final-cut-pro/",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e0/Final_Cut_Pro_logo.svg/1200px-Final_Cut_Pro_logo.svg.png",
+  "logo": "https://michimarketing.com/imgTools/final-cut-pro.png",
   "tutorialVideo": "https://www.youtube.com/watch?v=SjB-m2_fWqg",
   "screenshots": [],
   "pricing": [
@@ -1778,7 +1778,7 @@ export const tools: Tool[] = [
   "category": "Social Media Tools",
   "description": "Hootsuite es una plataforma de gestión de redes sociales que permite a los usuarios programar publicaciones, monitorear conversaciones, analizar el rendimiento y gestionar múltiples perfiles sociales desde un único panel de control. Es una herramienta líder en el mercado utilizada tanto por individuos como por grandes empresas para optimizar su estrategia en redes sociales.",
   "website": "https://www.hootsuite.com",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Hootsuite-Logo-White.svg/1200px-Hootsuite-Logo-White.svg.png",
+  "logo": "https://michimarketing.com/imgTools/Hootsuite.png",
   "tutorialVideo": "https://www.youtube.com/watch?v=SjB-m2_fWqg",
   "screenshots": [],
   "pricing": [
@@ -1926,7 +1926,7 @@ export const tools: Tool[] = [
   "category": "Social Media Tools",
   "description": "Buffer es una plataforma de software de gestión de redes sociales que facilita la programación de publicaciones en varias plataformas sociales desde un solo lugar. Se destaca por su interfaz de usuario limpia y minimalista, su facilidad de uso y por ofrecer un plan gratuito muy útil para individuos y pequeñas empresas.",
   "website": "https://buffer.com/",
-  "logo": "",
+  "logo": "https://michimarketing.com/imgTools/Buffer.png",
   "tutorialVideo": "https://www.youtube.com/watch?v=FjI1Jb715zM",
   "screenshots": [],
   "pricing": [
@@ -2053,7 +2053,7 @@ export const tools: Tool[] = [
   "category": "Social Media Tools",
   "description": "Sprout Social es una plataforma líder en gestión de redes sociales que se centra en la colaboración en equipo, la atención al cliente y el análisis detallado. Permite a las empresas planificar y publicar contenido, monitorear la actividad de la marca, interactuar con su audiencia y analizar el rendimiento en una interfaz potente y visualmente atractiva.",
   "website": "https://sproutsocial.com/",
-  "logo": "",
+  "logo": "https://michimarketing.com/imgTools/sprout-social.png",
   "tutorialVideo": "https://www.youtube.com/watch?v=SjB-m2_fWqg",
   "screenshots": [],
   "pricing": [
@@ -2195,7 +2195,7 @@ export const tools: Tool[] = [
   "category": "Social Media Tools",
   "description": "Later es una plataforma de gestión de redes sociales especializada en contenido visual, ideal para Instagram, TikTok y Pinterest. Su característica principal es el planificador visual, que permite a los usuarios organizar su feed de Instagram y otras plataformas de manera intuitiva, programar publicaciones y analizar el rendimiento de su contenido.",
   "website": "https://later.com/",
-  "logo": "",
+  "logo": "https://michimarketing.com/imgTools/Later.png",
   "tutorialVideo": "https://www.youtube.com/watch?v=SjB-m2_fWqg",
   "screenshots": [],
   "pricing": [
@@ -2331,7 +2331,7 @@ export const tools: Tool[] = [
   "category": "Marketing Automation",
   "description": "HubSpot es una plataforma integral de software que ofrece una suite completa de herramientas para marketing, ventas, servicio al cliente y gestión de contenido. Su enfoque principal es el 'inbound marketing', ayudando a las empresas a atraer, involucrar y deleitar a los clientes. La gestión de redes sociales es una de las muchas funciones que ofrece dentro de su Marketing Hub.",
   "website": "https://www.hubspot.es/",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e5/HubSpot_Logo.svg/1200px-HubSpot_Logo.svg.png",
+  "logo": "https://michimarketing.com/imgTools/HubSpot.png",
   "tutorialVideo": "https://www.youtube.com/watch?v=SjB-m2_fWqg",
   "screenshots": [],
   "pricing": [
