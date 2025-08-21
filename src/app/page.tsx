@@ -45,11 +45,11 @@ export default function Home() {
   const featuredTools = allTools.slice(0, 3);
 
   return (
-    <main className="max-w-7xl mx-auto px-6 py-12 space-y-16">
+    <main className="max-w-7xl mx-auto px-4 lg:py-3 space-y-16">
       {/* 🚀 HERO */}
       <Hero />
       {/* 🔍 Filtros y búsqueda */}
-      <section className="shadow-md rounded-xl p-6 space-y-6">
+      <section className="shadow-md rounded-xl p-6 space-y-6 ">
         <h2 className="text-2xl font-bold text-center">Encuentra la herramienta perfecta 🔎</h2>
         <div className="flex flex-col md:flex-row gap-4 justify-center">
           <input
@@ -82,7 +82,7 @@ export default function Home() {
       </section>
 
       {/* 🎯 Resultados o categorías */}
-      <section>
+      <section className="py-10">
         {hasSearched ? (
           <>
             <h2 className="text-3xl font-bold mb-6 text-center">Resultados de tu búsqueda</h2>
@@ -108,7 +108,7 @@ export default function Home() {
 
       {/* 🔥 Herramientas populares */}
       {!hasSearched && (
-        <section>
+        <section className="py-10">
           <h2 className="text-3xl font-bold mb-6 text-center">Herramientas Populares</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredTools.map((tool) => (

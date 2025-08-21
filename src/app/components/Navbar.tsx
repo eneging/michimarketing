@@ -358,13 +358,14 @@ export default function Navbar() {
               <SuggestionList />
             </div>
 
-            <Link
+          <Link
               href="/pro-plan"
               className="flex items-center bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium py-2 px-4 rounded-full border border-blue-500/30 hover:from-blue-600 hover:to-purple-600 transition-all duration-300 shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 group"
             >
-              <Sparkles className="w-4 h-4 mr-1.5" /> Premium
+              <Sparkles className="w-4 h-4 mr-1.5" /> suscribete
             </Link>
           </div>
+
         </div>
 
         {/* Botón Mobile */}
