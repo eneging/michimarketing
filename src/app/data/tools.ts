@@ -3298,7 +3298,7 @@ export const tools: Tool[] = [
   "slug": "wix-ecommerce",
   "category": "Ecommerce Tools",
   "description": "Wix eCommerce es una solución integrada de comercio electrónico que forma parte del constructor de sitios web Wix. Permite a los usuarios crear, diseñar y gestionar una tienda online con su editor visual de 'arrastrar y soltar' sin necesidad de conocimientos de programación. Es una opción popular para pequeños negocios y creativos que priorizan el diseño y la facilidad de uso.",
-  "website": "https://michimarketing.com/imgTools/Wix eCommerce.png",
+  "website": "https://michimarketing.com/imgTools/WixeCommerce.png",
   "logo": "",
   "tutorialVideo": "https://www.youtube.com/watch?v=SjB-m2_fWqg",
   "screenshots": [],
