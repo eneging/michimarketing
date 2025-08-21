@@ -7,7 +7,7 @@ export const tools: Tool[] = [
   "category": "AI Tools",
   "description": "Un chatbot de IA conversacional desarrollado por OpenAI. Puede generar texto similar al humano, escribir código, responder preguntas, crear imágenes y mucho más, basado en los modelos de lenguaje GPT-3.5 y GPT-4.",
   "website": "https://chat.openai.com/",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/1200px-ChatGPT_logo.svg.png",
+  "logo": "/src/app/data/imgTools/chatgpt.png",
   "tutorialVideo": "https://www.youtube.com/watch?v=ru_ltZA6NTM",
   "screenshots": [
     "https://i.ytimg.com/vi/c-g29cxSEiY/maxresdefault.jpg",
