@@ -2740,7 +2740,7 @@ export const tools: Tool[] = [
   "category": "Ecommerce Tools",
   "description": "Shopify es una plataforma líder de comercio electrónico que permite a individuos y empresas de todos los tamaños crear y gestionar sus propias tiendas online. Es una solución todo en uno que se encarga del alojamiento, los pagos, el marketing y la gestión del inventario, lo que la hace ideal para quienes no tienen conocimientos técnicos.",
   "website": "https://www.shopify.com/",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Shopify_logo.svg/1200px-Shopify_logo.svg.png",
+  "logo": "https://michimarketing.com/imgTools/Shopify.png",
   "tutorialVideo": "https://www.youtube.com/watch?v=SjB-m2_fWqg",
   "screenshots": [],
   "pricing": [
@@ -2887,7 +2887,7 @@ export const tools: Tool[] = [
   "category": "Ecommerce Tools",
   "description": "WooCommerce es un plugin de comercio electrónico de código abierto y gratuito para WordPress. Transforma cualquier sitio de WordPress en una tienda online totalmente funcional, permitiendo a los usuarios vender productos físicos, digitales y servicios. Es conocido por su flexibilidad, la propiedad total de los datos y el control sobre la plataforma, lo que lo hace ideal para usuarios que buscan una solución altamente personalizable.",
   "website": "https://woocommerce.com/",
-  "logo": "",
+  "logo": "https://michimarketing.com/imgTools/WooCommerce.png",
   "tutorialVideo": "https://www.youtube.com/watch?v=SjB-m2_fWqg",
   "screenshots": [],
   "pricing": [
@@ -3026,7 +3026,7 @@ export const tools: Tool[] = [
   "category": "Ecommerce Tools",
   "description": "BigCommerce es una plataforma de comercio electrónico de SaaS (Software as a Service) que permite a las empresas de todos los tamaños crear, lanzar y gestionar tiendas online. Es una solución robusta y escalable, conocida por sus herramientas de SEO integradas, su capacidad para gestionar grandes volúmenes de productos y ventas, y su enfoque en el crecimiento de negocios a escala empresarial.",
   "website": "https://www.bigcommerce.com/",
-  "logo": "https://upload.wikimedia.org/wikipedia/en/thumb/5/53/BigCommerce_logo.svg/1200px-BigCommerce_logo.svg.png",
+  "logo": "https://michimarketing.com/imgTools/BigCommerce.png",
   "tutorialVideo": "https://www.youtube.com/watch?v=SjB-m2_fWqg",
   "screenshots": [],
   "pricing": [
@@ -3174,7 +3174,7 @@ export const tools: Tool[] = [
   "category": "Ecommerce Tools",
   "description": "Magento (ahora conocido como Adobe Commerce para la versión de pago) es una de las plataformas de comercio electrónico de código abierto más potentes y flexibles del mercado. Está diseñada para tiendas online grandes y de rápido crecimiento que requieren un control total sobre su sitio web. Es conocida por su inmensa escalabilidad y su capacidad para manejar catálogos de productos masivos y altos volúmenes de tráfico.",
   "website": "https://magento.com/",
-  "logo": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Magento_logo.svg/1200px-Magento_logo.svg.png",
+  "logo": "https://michimarketing.com/imgTools/Magento.png",
   "tutorialVideo": "https://www.youtube.com/watch?v=SjB-m2_fWqg",
   "screenshots": [],
   "pricing": [
@@ -3298,7 +3298,7 @@ export const tools: Tool[] = [
   "slug": "wix-ecommerce",
   "category": "Ecommerce Tools",
   "description": "Wix eCommerce es una solución integrada de comercio electrónico que forma parte del constructor de sitios web Wix. Permite a los usuarios crear, diseñar y gestionar una tienda online con su editor visual de 'arrastrar y soltar' sin necesidad de conocimientos de programación. Es una opción popular para pequeños negocios y creativos que priorizan el diseño y la facilidad de uso.",
-  "website": "https://www.wix.com/ecommerce",
+  "website": "https://michimarketing.com/imgTools/Wix eCommerce.png",
   "logo": "",
   "tutorialVideo": "https://www.youtube.com/watch?v=SjB-m2_fWqg",
   "screenshots": [],
