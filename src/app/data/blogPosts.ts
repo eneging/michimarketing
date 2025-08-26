@@ -430,6 +430,117 @@ export const blogPosts: BlogPost[] = [
   category: "Productividad",
   relatedPosts: ["herramientas-digitales-emprendedores"]
 }
+,
+
+// 11
+{
+  title: "Guía Completa de Herramientas Digitales para Emprendedores 2025",
+  slug: "herramientas-digitales-emprendedores",
+  excerpt: "Las mejores apps y plataformas para gestionar tu negocio, crear contenido y vender más en línea.",
+  content: `
+    <h2>Introducción</h2>
+    <p>El mundo digital ofrece cientos de herramientas, pero no todas son útiles. Aquí te traigo un listado filtrado de las que realmente marcan la diferencia en 2025.</p>
+
+    <h3>Diseño y Branding</h3>
+    <p><strong>Canva</strong>: Plantillas profesionales para redes sociales, logos y presentaciones.</p>
+    <p><strong>Looka</strong>: Crea un logo único con inteligencia artificial.</p>
+
+    <h3>Gestión y Organización</h3>
+    <p><strong>Notion</strong>: Organiza proyectos, clientes y contenido en un solo lugar.</p>
+    <p><strong>Trello</strong>: Gestiona tareas con tableros visuales fáciles de usar.</p>
+
+    <h3>Marketing y Automatización</h3>
+    <p><strong>Mailchimp</strong>: Automatiza campañas de email marketing.</p>
+    <p><strong>Make</strong>: Conecta apps y crea flujos de trabajo automáticos.</p>
+
+    <h3>Ventas y E-commerce</h3>
+    <p><strong>Shopify</strong>: Construye tu tienda online en minutos.</p>
+    <p><strong>Stripe</strong>: Procesa pagos internacionales de manera simple.</p>
+
+    <h2>Conclusión</h2>
+    <p>No necesitas todas las herramientas del mercado, sino las que se adapten a tu negocio. Empieza con una o dos y crece paso a paso.</p>
+  `,
+  date: "2025-09-07",
+  author: "Edwar Rejas Reyes",
+  authorImage: "/images/edwar-rejas-reyes.jpg",
+  authorRole: "Fundador de Michi Marketing",
+  featuredImage: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=1170&auto=format&fit=crop",
+  readTime: 7,
+  tags: ["herramientas","emprendedores","digital"],
+  category: "Herramientas",
+  relatedPosts: ["productividad-estrategias-digitales"]
+},
+
+// 12
+{
+  title: "Tendencias de Marketing Digital 2025 que No Puedes Ignorar",
+  slug: "tendencias-marketing-2025",
+  excerpt: "La IA, el contenido interactivo y la personalización están transformando la manera de conectar con clientes.",
+  content: `
+    <h2>Introducción</h2>
+    <p>El marketing cambia cada año. Si quieres estar al frente de tu industria, debes conocer las tendencias que dominarán en 2025.</p>
+
+    <h3>Marketing con Inteligencia Artificial</h3>
+    <p>Desde la creación de textos hasta la segmentación avanzada de audiencias, la IA optimiza campañas en segundos.</p>
+
+    <h3>Contenido Interactivo</h3>
+    <p>Quizzes, encuestas y experiencias gamificadas aumentan el tiempo de permanencia y la participación.</p>
+
+    <h3>Personalización en Tiempo Real</h3>
+    <p>Los clientes esperan experiencias hechas a medida, desde recomendaciones de productos hasta emails con nombre y gustos específicos.</p>
+
+    <h3>SEO para Búsqueda por Voz</h3>
+    <p>Los asistentes virtuales (Alexa, Siri, Google) cambian cómo se hacen las consultas. Optimiza tu contenido para preguntas conversacionales.</p>
+
+    <h2>Conclusión</h2>
+    <p>No se trata de seguir todas las tendencias, sino de aplicar las que realmente generen valor para tu negocio.</p>
+  `,
+  date: "2025-09-08",
+  author: "Edwar Rejas Reyes",
+  authorImage: "/images/edwar-rejas-reyes.jpg",
+  authorRole: "Fundador de Michi Marketing",
+  featuredImage: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1170&auto=format&fit=crop",
+  readTime: 8,
+  tags: ["tendencias","marketing digital","IA"],
+  category: "Marketing",
+  relatedPosts: ["herramientas-digitales-emprendedores"]
+},
+
+// 13
+{
+  title: "Errores Comunes en Redes Sociales que Están Matando tu Alcance",
+  slug: "errores-redes-sociales",
+  excerpt: "Publicar sin estrategia, ignorar a tu audiencia y no medir resultados son fallas frecuentes que debes evitar.",
+  content: `
+    <h2>Introducción</h2>
+    <p>Muchos negocios creen que publicar más es la clave, pero sin estrategia pueden estar desperdiciando tiempo y dinero. Aquí te muestro los errores más comunes.</p>
+
+    <h3>No tener un calendario de contenidos</h3>
+    <p>Publicar al azar reduce consistencia y confunde a la audiencia. Un calendario te mantiene organizado.</p>
+
+    <h3>Ignorar la interacción con seguidores</h3>
+    <p>Responder mensajes y comentarios crea confianza. No hacerlo genera distancia con el cliente.</p>
+
+    <h3>Usar solo contenido promocional</h3>
+    <p>Si solo vendes, los usuarios pierden interés. Alterna con tips, humor y contenido educativo.</p>
+
+    <h3>No analizar métricas</h3>
+    <p>El alcance, clics y conversiones muestran qué funciona. Si no revisas datos, repites errores.</p>
+
+    <h2>Conclusión</h2>
+    <p>El éxito en redes no es publicar por publicar, sino hacerlo con propósito y estrategia clara.</p>
+  `,
+  date: "2025-09-09",
+  author: "Edwar Rejas Reyes",
+  authorImage: "/images/edwar-rejas-reyes.jpg",
+  authorRole: "Fundador de Michi Marketing",
+  featuredImage: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1170&auto=format&fit=crop",
+  readTime: 6,
+  tags: ["redes sociales","errores","estrategia"],
+  category: "Redes Sociales",
+  relatedPosts: ["tendencias-marketing-2025"]
+}
+
 
 
 

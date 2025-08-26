@@ -80,7 +80,7 @@ export default function RootLayout({
     <html lang="es">
 
 <head>
-
+<meta name="google-adsense-account" content="ca-pub-9559644099127130"></meta>
   <AdSense pid="pub-9559644099127130"></AdSense>
 </head>
       
