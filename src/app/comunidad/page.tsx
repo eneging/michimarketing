@@ -40,14 +40,14 @@ export default function ComunidadPage() {
         </div>
       </section>
 
-      {/* Videos Destacados */}
+     {/* 
       <section className="bg-gray-900 py-12">
         <h2 className="text-3xl font-bold text-center mb-8">🎥 Contenido Destacado</h2>
         <div className="flex flex-col md:flex-row justify-center gap-6 px-6">
           <div className="w-full md:w-1/2">
             <iframe
               className="w-full h-64 rounded-xl shadow-lg"
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+              src="https://www.youtube.com/watch?v=DKY8cAbdhnM"
               title="Video destacado"
               allowFullScreen
             />
@@ -61,7 +61,7 @@ export default function ComunidadPage() {
             />
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Comunidades */}
       <section className="max-w-6xl mx-auto px-6 py-12">
