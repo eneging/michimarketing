@@ -4,42 +4,26 @@ import { useState, useMemo, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Menu, X, Search, Sparkles, ChevronDown, MoreHorizontal } from "lucide-react";
+import { tools } from "../data/tools";
+import { categories } from "../data/Categories";
 
 // ------------------------------------------------
 // Definición de tipos
 // ------------------------------------------------
 
-type Tool = {
-  slug: string;
-  name: string;
-  logo?: string;
-  description?: string;
-  category?: string;
-  tags?: string[];
-};
-
-type Category = {
-  slug: string;
-  name: string;
-  description?: string;
-};
-
 type Suggestion =
-  | ({ kind: "tool" } & Tool)
-  | ({ kind: "category" } & Category);
-
-// Datos de ejemplo (deberías reemplazarlos con tus imports reales)
-const tools: Tool[] = [
-  { slug: "tool-1", name: "Google Analytics", description: "Herramienta de analítica web", category: "Analítica" },
-  { slug: "tool-2", name: "Ahrefs", description: "Herramienta de SEO", category: "SEO" },
-  { slug: "tool-3", name: "Mailchimp", description: "Plataforma de email marketing", category: "Email Marketing" },
-];
-
-const categories: Category[] = [
-  { slug: "seo", name: "SEO", description: "Herramientas de optimización para motores de búsqueda" },
-  { slug: "analitica", name: "Analítica", description: "Herramientas de análisis de datos" },
-  { slug: "social-media", name: "Social Media", description: "Herramientas para redes sociales" },
-];
+  | ({ kind: "tool" } & {
+      slug: string;
+      name: string;
+      logo?: string;
+      description?: string;
+      category?: string;
+    })
+  | ({ kind: "category" } & {
+      slug: string;
+      name: string;
+      description?: string;
+    });
 
 // Modal para enlaces adicionales
 function MoreLinksModal({ isOpen, onClose, links }: { 
@@ -47,32 +31,13 @@ function MoreLinksModal({ isOpen, onClose, links }: {
   onClose: () => void; 
   links: { href: string; label: string }[];
 }) {
-  const modalRef = useRef<HTMLDivElement>(null);
-
-  // Cerrar modal al hacer clic fuera de él
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (modalRef.current && !modalRef.current.contains(event.target as Node)) {
-        onClose();
-      }
-    }
-
-    if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-    
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isOpen, onClose]);
-
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm">
       <div 
-        ref={modalRef}
         className="bg-gray-900 border border-gray-700/50 rounded-xl p-6 w-full max-w-md mx-4"
+        onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-between items-center mb-4">
           <h3 className="text-lg font-semibold text-white">Más enlaces</h3>
@@ -109,43 +74,19 @@ function MoreLinksModal({ isOpen, onClose, links }: {
 }
 
 // Tooltip para enlaces adicionales
-function MoreLinksTooltip({ isOpen, onClose, links }: { 
+function MoreLinksTooltip({ isOpen, links }: { 
   isOpen: boolean; 
-  onClose: () => void;
   links: { href: string; label: string }[];
 }) {
-  const tooltipRef = useRef<HTMLDivElement>(null);
-
-  // Cerrar tooltip al hacer clic fuera de él
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (tooltipRef.current && !tooltipRef.current.contains(event.target as Node)) {
-        onClose();
-      }
-    }
-
-    if (isOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-    
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [isOpen, onClose]);
-
   if (!isOpen) return null;
 
   return (
-    <div 
-      ref={tooltipRef}
-      className="absolute top-full right-0 mt-2 w-48 bg-gray-900 border border-gray-700/50 rounded-xl shadow-xl z-50 overflow-hidden"
-    >
+    <div className="absolute top-full right-0 mt-2 w-48 bg-gray-900 border border-gray-700/50 rounded-xl shadow-xl z-50 overflow-hidden">
       {links.map((link, index) => (
         <Link
           key={index}
           href={link.href}
           className="block px-4 py-3 text-gray-300 hover:bg-gray-800/60 transition-colors text-sm border-b border-gray-800/30 last:border-b-0"
-          onClick={onClose}
         >
           {link.label}
         </Link>
@@ -155,7 +96,7 @@ function MoreLinksTooltip({ isOpen, onClose, links }: {
 }
 
 // ------------------------------------------------
-// Componente principal: Navbar
+/* Componente principal: Navbar */
 // ------------------------------------------------
 
 export default function Navbar() {
@@ -166,7 +107,7 @@ export default function Navbar() {
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
   const [moreLinksOpen, setMoreLinksOpen] = useState(false);
   const [useModal, setUseModal] = useState(false);
-  const moreButtonRef = useRef<HTMLButtonElement>(null);
+  const moreLinksRef = useRef<HTMLDivElement>(null);
   
   const router = useRouter();
 
@@ -174,20 +115,40 @@ export default function Navbar() {
   const mainLinks = [
     { href: "/", label: "Inicio", id: "home" },
     { href: "/tools", label: "Todas las Herramientas", id: "tools" },
-    { href: "/comparativas", label: "Comparativas", id: "comparativas" },
+  //  { href: "/comparativas", label: "Comparativas", id: "comparativas" },
   ];
 
   const additionalLinks = [
-    { href: "/deals", label: "Ofertas" },
+   // { href: "/deals", label: "Ofertas" },
     { href: "/blog", label: "Blog" },
-    { href: "/cursos", label: "Cursos" },
+    //{ href: "/cursos", label: "Cursos" },
     { href: "/comunidad", label: "Comunidad" },
   ];
+
+  
+// Cerrar menú de enlaces adicionales al hacer clic fuera (solo tooltip, no modal)
+useEffect(() => {
+  if (useModal) return; // ⬅️ No cerrar si es modal
+
+  function handleClickOutside(event: MouseEvent) {
+    if (moreLinksRef.current && !moreLinksRef.current.contains(event.target as Node)) {
+      setMoreLinksOpen(false);
+    }
+  }
+
+  document.addEventListener("mousedown", handleClickOutside);
+  return () => {
+    document.removeEventListener("mousedown", handleClickOutside);
+  };
+}, [useModal]);
+
+
+
 
   // Determinar si usar modal basado en el ancho de pantalla
   useEffect(() => {
     const checkScreenSize = () => {
-      setUseModal(window.innerWidth < 1024);
+      setUseModal(window.innerWidth < 1024); // Usar modal en pantallas menores a 1024px
     };
 
     checkScreenSize();
@@ -195,23 +156,6 @@ export default function Navbar() {
     
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
-
-  // Cerrar menú de enlaces adicionales al hacer clic fuera
-  useEffect(() => {
-    function handleClickOutside(event: MouseEvent) {
-      if (moreButtonRef.current && !moreButtonRef.current.contains(event.target as Node)) {
-        setMoreLinksOpen(false);
-      }
-    }
-
-    if (moreLinksOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-    
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [moreLinksOpen]);
 
   // ------------------------------------------------
   // Función para manejar la búsqueda
@@ -227,7 +171,7 @@ export default function Navbar() {
   };
 
   // ------------------------------------------------
-  // Generar sugerencias
+  // Generar sugerencias (protegido contra undefined)
   // ------------------------------------------------
   const allSuggestions: Suggestion[] = useMemo(() => {
     if (!query.trim()) return [];
@@ -474,11 +418,15 @@ export default function Navbar() {
               </div>
 
               {/* Botón para enlaces adicionales */}
-              <div className="relative">
+              <div 
+                className="relative"
+                ref={moreLinksRef}
+              >
                 <button 
-                  ref={moreButtonRef}
                   className="flex items-center text-gray-300 font-medium px-3 py-2 rounded-lg hover:bg-gray-800/30 transition-all duration-300 relative group"
                   onClick={() => setMoreLinksOpen(!moreLinksOpen)}
+                  onMouseEnter={() => !useModal && setMoreLinksOpen(true)}
+                 
                 >
                   Más
                   <MoreHorizontal size={16} className="ml-1 opacity-60" />
@@ -486,11 +434,7 @@ export default function Navbar() {
                 </button>
 
                 {!useModal && (
-                  <MoreLinksTooltip 
-                    isOpen={moreLinksOpen} 
-                    onClose={() => setMoreLinksOpen(false)}
-                    links={additionalLinks} 
-                  />
+                  <MoreLinksTooltip isOpen={moreLinksOpen} links={additionalLinks} />
                 )}
               </div>
             </div>
@@ -527,10 +471,10 @@ export default function Navbar() {
               </div>
 
               <Link
-                href="/pro-plan"
+                href="/comunidad"
                 className="flex items-center bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium py-2 px-4 rounded-full border border-blue-500/30 hover:from-blue-600 hover:to-purple-600 transition-all duration-300 shadow-lg shadow-blue-500/20 hover:shadow-blue-500/30 group"
               >
-                <Sparkles className="w-4 h-4 mr-1.5" /> suscribete
+                <Sparkles className="w-4 h-4 mr-1.5" /> Comunidad
               </Link>
             </div>
           </div>
@@ -626,13 +570,13 @@ export default function Navbar() {
                 </Link>
               ))}
 
-              <Link
+            {/*  <Link
                 href="/pro-plan"
                 onClick={() => setMenuOpen(false)}
                 className="flex items-center justify-center bg-gradient-to-r from-blue-500 to-purple-500 text-white font-medium py-3 rounded-lg hover:from-blue-600 hover:to-purple-600 transition-all duration-300 mt-4 shadow-lg shadow-blue-500/20"
               >
                 <Sparkles className="w-4 h-4 mr-2" /> Premium
-              </Link>
+              </Link>*/}
             </div>
           </div>
         )}

@@ -77,10 +77,10 @@ export default function Hero() {
             <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
           </a>
           <a
-            href="#newsletter"
+            href="comunidad"
             className="px-8 py-4 bg-transparent border border-gray-600 text-white font-medium rounded-full transition-all hover:border-gray-400 hover:bg-gray-800/30 hover:shadow-lg hover:shadow-white/5"
           >
-            Suscríbete
+            Unete a la comunidad
           </a>
         </motion.div>
 

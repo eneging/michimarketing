@@ -6,7 +6,7 @@ import Hero from "./components/Hero";
 import ToolCard from "./components/ToolCard";
 import { categories } from "./data/Categories";
 import { tools as allTools } from "./data/tools";
-import Newsletter from "./components/Newsletter";
+//import Newsletter from "./components/Newsletter";
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -118,7 +118,7 @@ export default function Home() {
         </section>
       )}
 
-      <Newsletter />
+    {/*  <Newsletter />*/}
     </main>
   );
 }
