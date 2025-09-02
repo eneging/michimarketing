@@ -8,7 +8,7 @@ interface RelatedPost {
   slug: string;
   title: string;
   date: string;
-  featuredImage?: string;
+  featured_image?: string;
 }
 
 interface RelatedPostsProps {
@@ -26,10 +26,10 @@ export default function RelatedPosts({ relatedPosts }: RelatedPostsProps) {
             href={`/blog/${related.slug}`}
             className="block bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1"
           >
-            {related.featuredImage && (
+            {related.featured_image && (
               <div className="relative w-full h-48 overflow-hidden">
                 <Image
-                  src={related.featuredImage}
+                  src={related.featured_image}
                   alt={related.title}
                   fill
                   className="object-cover"

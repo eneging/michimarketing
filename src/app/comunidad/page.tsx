@@ -1,7 +1,7 @@
 // app/comunidad/page.tsx
-import Image from "next/image";
+//import Image from "next/image";
 import Link from "next/link";
-import { communities } from "../data/communities";
+//import { communities } from "../data/communities";
 import { FaYoutube, FaTiktok, FaInstagram, FaFacebook, FaDiscord } from "react-icons/fa";
 
 export default function ComunidadPage() {
@@ -31,7 +31,7 @@ export default function ComunidadPage() {
           <Link href="https://instagram.com" target="_blank" className="text-pink-500 hover:scale-110 transition">
             <FaInstagram />
           </Link>
-          <Link href="https://facebook.com" target="_blank" className="text-blue-500 hover:scale-110 transition">
+          <Link href="https://www.facebook.com/profile.php?id=61574073081363" target="_blank" className="text-blue-500 hover:scale-110 transition">
             <FaFacebook />
           </Link>
           <Link href="https://discord.gg" target="_blank" className="text-indigo-500 hover:scale-110 transition">
@@ -64,7 +64,9 @@ export default function ComunidadPage() {
       </section> */}
 
       {/* Comunidades */}
-      <section className="max-w-6xl mx-auto px-6 py-12">
+
+
+     {/* <section className="max-w-6xl mx-auto px-6 py-12">
         <h2 className="text-3xl font-bold text-center mb-10">🤝 Nuestras Comunidades</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
           {communities.map((community) => (
@@ -72,7 +74,7 @@ export default function ComunidadPage() {
               key={community.id}
               className="bg-gray-900 rounded-xl shadow-md overflow-hidden flex flex-col hover:shadow-xl hover:scale-[1.03] transition-transform"
             >
-              {/* Imagen */}
+              {/* Imagen 
               <div className="relative w-full h-48">
                 <Image
                   src={community.image}
@@ -82,7 +84,7 @@ export default function ComunidadPage() {
                 />
               </div>
 
-              {/* Contenido */}
+              {/* Contenido 
               <div className="p-6 flex flex-col flex-grow">
                 <h3 className="text-xl font-semibold mb-2 text-purple-400">
                   {community.name}
@@ -104,7 +106,9 @@ export default function ComunidadPage() {
             </div>
           ))}
         </div>
-      </section>
+      </section> */}
+
+
     </div>
   );
 }

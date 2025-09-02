@@ -1,13 +1,29 @@
 // app/categories/[slug]/page.tsx
 import { Wand2, Megaphone, Palette, BarChart3, Users, MessageSquare, Camera, Code, DollarSign, Mail } from "lucide-react";
-import { tools } from "../../data/tools";
-import { categories } from "../../data/Categories";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-
-// Definimos el tipo para el icono como React.ReactNode
 import type { ReactNode } from 'react';
+
+// Tipos para las estructuras de datos que esperamos de la API
+interface Tool {
+  id: number;
+  name: string;
+  slug: string;
+  description: string;
+  category_id?: number;
+  rating?: number;
+  tags?: string[];
+  logo?: string;
+}
+
+interface Category {
+  id: number;
+  name: string;
+  slug: string;
+  description: string;
+
+}
 
 // Íconos dinámicos para categorías
 const categoryIcons: { [key: string]: ReactNode } = {
@@ -23,7 +39,7 @@ const categoryIcons: { [key: string]: ReactNode } = {
   email: <Mail className="w-12 h-12 text-cyan-500" />,
 };
 
-// Tipos para los parámetros
+// Tipos para los parámetros del componente
 interface CategoryPageParams {
   slug: string;
 }
@@ -32,20 +48,43 @@ interface CategoryPageProps {
   params: Promise<CategoryPageParams>;
 }
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/api";
+
+// Función para obtener los datos de la categoría y sus herramientas desde la API (Optimizado)
+async function getCategoryAndTools(slug: string): Promise<{ category: Category | null; tools: Tool[] }> {
+  try {
+    // 1. Obtener la categoría primero para obtener su ID
+    const categoryRes = await fetch(`${API_URL}/categories/${slug}`, { next: { revalidate: 3600 } });
+
+    if (!categoryRes.ok) {
+      return { category: null, tools: [] };
+    }
+
+    const categoryData = await categoryRes.json();
+    const category = categoryData.data || categoryData;
+
+    // 2. Usar el ID de la categoría para filtrar las herramientas.
+    // Asume que tu API de herramientas puede filtrar por category_id.
+    const toolsRes = await fetch(`${API_URL}/tools?category_id=${category.id}`, { next: { revalidate: 3600 } });
+    const toolsData = await toolsRes.json();
+    const tools = toolsData.data || toolsData;
+
+    return { category, tools };
+  } catch (error) {
+    console.error("Error fetching data:", error);
+    return { category: null, tools: [] };
+  }
+}
+
 export default async function CategoryPage({ params }: CategoryPageProps) {
   const { slug } = await params;
   
-  // Encontrar la categoría
-  const category = categories.find((c) => c.slug === slug);
+  const { category, tools: categoryTools } = await getCategoryAndTools(slug);
   
   if (!category) {
     notFound();
   }
   
-  // Filtrar herramientas por categoría
-  const categoryTools = tools.filter((tool) => tool.category === category.name);
-  
-  // Obtener el icono para la categoría o usar uno por defecto
   const categoryIcon = categoryIcons[slug] || <Wand2 className="w-12 h-12 text-gray-500" />;
 
   return (
@@ -71,7 +110,11 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
         </div>
         <div className="bg-gray-900/50 border border-gray-800 rounded-2xl p-6 text-center">
           <div className="text-3xl font-bold text-white mb-2">
-            {Math.round(categoryTools.reduce((acc, tool) => acc + (tool.rating || 0), 0) / categoryTools.length || 0)}
+            {categoryTools.length > 0
+              ? Math.round(
+                  (categoryTools.reduce((acc, tool) => acc + (tool.rating || 0), 0) / categoryTools.length) * 10
+                ) / 10
+              : 0}
           </div>
           <div className="text-gray-400">Rating Promedio</div>
         </div>
@@ -157,20 +200,36 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
   );
 }
 
-// Generación estática de rutas
+// Función para generar rutas estáticas
 export async function generateStaticParams() {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/api";
+  
+  const res = await fetch(`${API_URL}/categories`, { next: { revalidate: 3600 } });
+  const data = await res.json();
+  const categories: Category[] = data.data || data;
+
   return categories.map((category) => ({
     slug: category.slug,
   }));
 }
 
-// Metadata para SEO
+// Función para generar metadatos (SEO)
 export async function generateMetadata({ params }: CategoryPageProps) {
   const { slug } = await params;
-  const category = categories.find((c) => c.slug === slug);
   
+  // Optimizamos la llamada para obtener solo la categoría, no todas las herramientas
+  const res = await fetch(`${API_URL}/categories/${slug}`, { next: { revalidate: 3600 } });
+  if (!res.ok) {
+    return {
+      title: "Categoría no encontrada",
+      description: "La categoría que buscas no existe.",
+    };
+  }
+  const data = await res.json();
+  const category: Category = data.data || data;
+
   return {
     title: category ? `${category.name} - Herramientas de Marketing` : "Categoría no encontrada",
-    description: category?.description || "Explora herramientas de marketing digital",
+    description: category?.description || "Explora herramientas de marketing digital.",
   };
 }

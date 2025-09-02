@@ -4,7 +4,7 @@ const nextConfig: NextConfig = {
  
   images: {
     domains: ['upload.wikimedia.org', 'images.unsplash.com', 
-   "michimarketing.com",
+   "michimarketing.com", "picsum.photos", "i.ytimg.com","cdn.openai.com", "placehold.co"
 
     ],
   },

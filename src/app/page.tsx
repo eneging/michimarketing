@@ -1,124 +1,170 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import CategoryCard from "./components/CategoryCard";
+
 import Hero from "./components/Hero";
 import ToolCard from "./components/ToolCard";
-import { categories } from "./data/Categories";
-import { tools as allTools } from "./data/tools";
-//import Newsletter from "./components/Newsletter";
 
 export default function Home() {
+  const [tools, setTools] = useState<any[]>([]);
+  const [categories, setCategories] = useState<any[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
   const [selectedPrice, setSelectedPrice] = useState("");
-  const [filteredTools, setFilteredTools] = useState(allTools);
-  const [hasSearched, setHasSearched] = useState(false);
+  const [loading, setLoading] = useState(false);
 
+  // 🔹 Estados de paginación
+  const [page, setPage] = useState(1);
+  const [pagination, setPagination] = useState<any>(null);
+
+  // 🚀 cargar categorías
   useEffect(() => {
-    const results = allTools.filter((tool) => {
-      const matchesSearch =
-        !searchTerm ||
-        tool.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        tool.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        (tool.tags &&
-          tool.tags.some((tag) =>
-            tag.toLowerCase().includes(searchTerm.toLowerCase())
-          ));
+    fetch("http://127.0.0.1:8000/api/categories")
+      .then((res) => res.json())
+      .then((data) => setCategories(data.data ?? []))
+      .catch((err) => console.error(err));
+  }, []);
 
-      const matchesCategory = !selectedCategory || tool.category === selectedCategory;
+  // 🚀 cargar herramientas según filtros + página
+  useEffect(() => {
+    async function fetchTools() {
+      setLoading(true);
+      try {
+        const params = new URLSearchParams();
+        params.append("page", page.toString()); // 👈 incluir página
 
-      const matchesPrice =
-        !selectedPrice ||
-        tool.pricing?.some((p) => {
-          if (selectedPrice === "free") return p.plan === "free" || p.plan === "freemium";
-          return p.plan === selectedPrice;
-        });
+        if (searchTerm) params.append("search", searchTerm);
+        if (selectedCategory) params.append("category_id", selectedCategory);
+        if (selectedPrice) params.append("tag", selectedPrice);
 
-      return matchesSearch && matchesCategory && matchesPrice;
-    });
+        const res = await fetch(
+          `http://127.0.0.1:8000/api/tools?${params.toString()}`
+        );
+        const data = await res.json();
 
-    setFilteredTools(results);
-    setHasSearched(!!(searchTerm || selectedCategory || selectedPrice));
-  }, [searchTerm, selectedCategory, selectedPrice]);
+        setTools(data.data ?? []);
+        setPagination(data); // 👈 guardar metadata de paginación
+      } catch (error) {
+        console.error("Error cargando tools:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
 
-  const featuredTools = allTools.slice(0, 3);
+    fetchTools();
+  }, [searchTerm, selectedCategory, selectedPrice, page]);
+
+  const featuredTools = tools.slice(0, 3);
 
   return (
     <main className="max-w-7xl mx-auto px-4 lg:py-3 space-y-16">
-      {/* 🚀 HERO */}
       <Hero />
-      {/* 🔍 Filtros y búsqueda */}
+
+      {/* Filtros */}
       <section className="shadow-md rounded-xl p-6 space-y-6 ">
-        <h2 className="text-2xl font-bold text-center">Encuentra la herramienta perfecta 🔎</h2>
+        <h2 className="text-2xl font-bold text-center">
+          Encuentra la herramienta perfecta 🔎
+        </h2>
         <div className="flex flex-col md:flex-row gap-4 justify-center">
           <input
             type="text"
-            placeholder="Buscar por nombre, descripción o tags..."
-            className="w-full md:w-1/2 border rounded-lg px-4 py-2 focus:ring-2 focus:ring-indigo-500"
+            placeholder="Buscar..."
+            className="w-full md:w-1/2 border rounded-lg px-4 py-2"
             value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
+            onChange={(e) => {
+              setSearchTerm(e.target.value);
+              setPage(1); // reset página al filtrar
+            }}
           />
           <select
-            className="w-full md:w-1/4  border rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-500"
+            className="w-full md:w-1/4 border rounded-lg px-3 py-2"
             value={selectedCategory}
-            onChange={(e) => setSelectedCategory(e.target.value)}
+            onChange={(e) => {
+              setSelectedCategory(e.target.value);
+              setPage(1);
+            }}
           >
-            <option className="text-gray-950" value="">Todas las categorías</option>
+            <option value="">Todas las categorías</option>
             {categories.map((cat) => (
-              <option className="text-black" key={cat.slug} value={cat.slug}>{cat.name}</option>
+              <option key={cat.id} value={cat.id}>
+                {cat.name}
+              </option>
             ))}
           </select>
           <select
-            className="w-full  md:w-1/4 border rounded-lg px-3 py-2 focus:ring-2 focus:ring-indigo-500"
+            className="w-full md:w-1/4 border rounded-lg px-3 py-2"
             value={selectedPrice}
-            onChange={(e) => setSelectedPrice(e.target.value)}
+            onChange={(e) => {
+              setSelectedPrice(e.target.value);
+              setPage(1);
+            }}
           >
-            <option className="text-black"  value="">Todos los planes</option>
-            <option className="text-black"  value="free">Gratis</option>
-            <option className="text-black"  value="premium">Premium</option>
+            <option value="">Todos los planes</option>
+            <option value="free">Gratis</option>
+            <option value="premium">Premium</option>
           </select>
         </div>
       </section>
 
-      {/* 🎯 Resultados o categorías */}
+      {/* Resultados */}
       <section className="py-10">
-        {hasSearched ? (
+        {loading ? (
+          <p className="text-center">Cargando...</p>
+        ) : tools.length > 0 ? (
           <>
-            <h2 className="text-3xl font-bold mb-6 text-center">Resultados de tu búsqueda</h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredTools.length > 0 ? filteredTools.map((tool) => (
-                <ToolCard key={tool.slug} {...tool} />
-              )) : (
-                <p className="text-center col-span-full">No se encontraron herramientas que coincidan con los filtros.</p>
-              )}
-            </div>
-          </>
-        ) : (
-          <>
-            <h2 className="text-3xl font-bold mb-8 text-center">Categorías Destacadas</h2>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-              {categories.map((cat) => (
-                <CategoryCard key={cat.slug} {...cat} />
+              {tools.map((tool) => (
+                <ToolCard key={tool.id} {...tool} />
               ))}
             </div>
+
+            {/* 🔹 Controles de paginación */}
+            {pagination && (
+              <div className="flex justify-center items-center gap-4 mt-6">
+                <button
+                  disabled={pagination.current_page === 1}
+                  onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+                  className="px-4 py-2 rounded-lg border bg-white disabled:opacity-50"
+                >
+                  ⬅️ Anterior
+                </button>
+                <span>
+                  Página {pagination.current_page} de {pagination.last_page}
+                </span>
+                <button
+                  disabled={pagination.current_page === pagination.last_page}
+                  onClick={() =>
+                    setPage((prev) =>
+                      Math.min(prev + 1, pagination.last_page)
+                    )
+                  }
+                  className="px-4 py-2 rounded-lg border bg-white disabled:opacity-50"
+                >
+                  Siguiente ➡️
+                </button>
+              </div>
+            )}
           </>
+        ) : (
+          <p className="text-center">No se encontraron herramientas.</p>
         )}
       </section>
 
-      {/* 🔥 Herramientas populares */}
-      {!hasSearched && (
+
+
+      {/* Destacados */}
+      {!loading && tools.length > 0 && (
         <section className="py-10">
-          <h2 className="text-3xl font-bold mb-6 text-center">Herramientas Populares</h2>
+          <h2 className="text-3xl font-bold mb-6 text-center">
+            Herramientas Populares
+          </h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {featuredTools.map((tool) => (
-              <ToolCard key={tool.slug} {...tool} />
+              <ToolCard key={tool.id} {...tool} />
             ))}
           </div>
         </section>
       )}
-
-    {/*  <Newsletter />*/}
     </main>
   );
 }

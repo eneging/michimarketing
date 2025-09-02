@@ -22,6 +22,8 @@ const geistMono = Geist_Mono({
 
 // Metadatos globales (SEO + Redes sociales)
 export const metadata: Metadata = {
+   metadataBase: new URL("https://michimarketing.com"),
+   
   title: {
     default: "MichiMarketing - AI Tools Directory",
     template: "%s | MichiMarketing",

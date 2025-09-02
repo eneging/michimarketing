@@ -5,7 +5,7 @@ export interface Community {
   description: string;
   slug: string;
   image: string;
-  platform: "Discord" | "Telegram" | "Facebook" | "Foro";
+  platform: "Discord" | "Telegram" | "YouTube" | "Facebook" | "Foro";
   members: string;
   affiliateUrl: string; // link de invitación o afiliado
 }
@@ -13,57 +13,79 @@ export interface Community {
 export const communities: Community[] = [
   {
     id: "1",
-    name: "SEO Latam",
+    name: "Marketing Digital México",
     description:
-      "Comunidad enfocada en estrategias de posicionamiento web, intercambio de herramientas y estudios de caso en español.",
-    slug: "seo-latam",
-    image: "/images/communities/seo-latam.jpg",
+      "Comunidad activa en Telegram para compartir estrategias de marketing digital, SEO, y publicidad online en español.",
+    slug: "marketing-digital-mexico",
+    image: "/images/communities/marketing-digital-mx.jpg",
     platform: "Telegram",
-    members: "5.2k miembros",
-    affiliateUrl: "https://t.me/seo_latam", // ejemplo
+    members: "22k miembros",
+    affiliateUrl: "https://t.me/marketingdigitalmexico",
   },
   {
     id: "2",
-    name: "Growth Hackers en Español",
+    name: "Programadores Latam",
     description:
-      "Grupo donde marketers y emprendedores comparten tácticas de crecimiento, funnels y automatización.",
-    slug: "growth-hackers-es",
-    image: "/images/communities/growth.jpg",
-    platform: "Facebook",
-    members: "12k miembros",
-    affiliateUrl: "https://facebook.com/groups/growthhackersES", // ejemplo
+      "Comunidad en Discord para programadores y desarrolladores en español, con canales de tecnologías como JavaScript, Python, y Machine Learning.",
+    slug: "programadores-latam",
+    image: "/images/communities/programadores-latam.jpg",
+    platform: "Discord",
+    members: "30k miembros",
+    affiliateUrl: "https://discord.gg/programadoreslatam",
   },
   {
     id: "3",
-    name: "Emprendedores Digitales",
+    name: "SEO y Marketing Online - Jon Mircha",
     description:
-      "Espacio de networking para quienes inician negocios online, marketing de afiliados y e-commerce.",
-    slug: "emprendedores-digitales",
-    image: "/images/communities/emprendedores.jpg",
-    platform: "Discord",
-    members: "3.8k miembros",
-    affiliateUrl: "https://discord.gg/emprendedores", // ejemplo
+      "Canal de YouTube con contenido actualizado en SEO, marketing digital y emprendimiento online impartido por Jon Mircha.",
+    slug: "jon-mircha",
+    image: "/images/communities/jon-mircha.jpg",
+    platform: "YouTube",
+    members: "250k suscriptores",
+    affiliateUrl: "https://www.youtube.com/c/JonMircha",
   },
   {
     id: "4",
-    name: "Foro SEO Warriors",
+    name: "MoureDev Academy",
     description:
-      "Foro especializado en SEO técnico, link building y estrategias avanzadas para dominar Google.",
-    slug: "seo-warriors",
-    image: "/images/communities/warriors.jpg",
-    platform: "Foro",
-    members: "9.4k miembros",
-    affiliateUrl: "https://seowarriors.com/foro", // ejemplo
+      "Canal de YouTube enfocado en desarrollo de software, nuevas tecnologías y marketing para programadores hispanohablantes.",
+    slug: "mouredev-academy",
+    image: "/images/communities/mouredev.jpg",
+    platform: "YouTube",
+    members: "350k suscriptores",
+    affiliateUrl: "https://www.youtube.com/c/MoureDev",
   },
   {
     id: "5",
-    name: "Marketeros Unidos",
+    name: "Foro Marketing de Guerrilla",
     description:
-      "Canal abierto en Telegram para discutir tendencias, IA en marketing, email marketing y casos reales.",
-    slug: "marketeros-unidos",
-    image: "/images/communities/marketeros.jpg",
+      "Foro especializado en estrategias de marketing innovadoras, branding y técnicas de crecimiento para pequeñas y medianas empresas.",
+    slug: "marketing-de-guerrilla",
+    image: "/images/communities/marketing-guerrilla.jpg",
+    platform: "Foro",
+    members: "5k miembros",
+    affiliateUrl: "https://foro.marketingdeguerrilla.mx",
+  },
+  {
+    id: "6",
+    name: "Growth Marketing Latam",
+    description:
+      "Grupo de Facebook para compartir tácticas de crecimiento, analítica y automatización aplicadas al marketing digital.",
+    slug: "growth-marketing-latam",
+    image: "/images/communities/growth-latam.jpg",
+    platform: "Facebook",
+    members: "18k miembros",
+    affiliateUrl: "https://www.facebook.com/groups/growthmarketinglatam",
+  },
+  {
+    id: "7",
+    name: "La Comunidad de IA en Español",
+    description:
+      "Telegram para interesados en inteligencia artificial aplicada a marketing, tecnologías emergentes y machine learning.",
+    slug: "ia-en-espanol",
+    image: "/images/communities/ia-espanol.jpg",
     platform: "Telegram",
-    members: "7.1k miembros",
-    affiliateUrl: "https://t.me/marketeros_unidos", // ejemplo
+    members: "15k miembros",
+    affiliateUrl: "https://t.me/comunidadIA",
   },
 ];

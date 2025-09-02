@@ -1,112 +1,158 @@
-// app/blog/[slug]/page.tsx
-import { blogPosts } from "../../data/blogPosts";
 import { notFound } from "next/navigation";
 import Image from "next/image";
 import Link from "next/link";
-import ScrollToTop from "../[slug]/ScrollToTop";
-import RelatedPosts from "../[slug]/RelatedPosts";
+import type { Metadata } from "next";
+import { ScrollToTop } from "./ScrollToTop";
+
+// --- Interfaces ---
+interface BlogPost {
+  id: number;
+  slug: string;
+  title: string;
+  excerpt: string;
+  content: string;
+  featured_image?: string;
+  category?: string;
+  author: string;
+  author_image?: string;
+  author_role?: string;
+  date: string;
+  tags?: string[];
+  read_time?: number;
+  relatedPosts?: string[];
+}
 
 interface BlogPageParams {
   slug: string;
 }
 
 interface BlogPageProps {
-  params: Promise<BlogPageParams>;
+  params: Promise<BlogPageParams>; // 👈 nuevo estándar Next.js
 }
 
 export const dynamic = "force-static";
 
+// --- API helpers ---
+async function getAllPosts(): Promise<BlogPost[]> {
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+  try {
+    const res = await fetch(`${API_URL}/api/blog-posts?per_page=100`, { next: { revalidate: 3600 } });
+    if (!res.ok) return [];
+    const json = await res.json();
+
+    return Array.isArray(json?.data?.data) ? json.data.data : [];
+  } catch {
+    return [];
+  }
+}
+
+async function getPostAndRelated(slug: string): Promise<{ post: BlogPost | null; related: BlogPost[] }> {
+  const allPosts = await getAllPosts();
+  const post = allPosts.find((p) => p.slug === slug) || null;
+  const related = post?.relatedPosts ? allPosts.filter((p) => post.relatedPosts?.includes(p.slug)) : [];
+  return { post, related };
+}
+
+// --- Metadata ---
+export async function generateMetadata({ params }: BlogPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const { post } = await getPostAndRelated(slug);
+
+  if (!post) return { title: "Post no encontrado" };
+
+  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+  const image = post.featured_image
+    ? post.featured_image.startsWith("http")
+      ? post.featured_image
+      : `${API_URL}${post.featured_image}`
+    : "https://placehold.co/1200x630/0a0a0a/10b981?text=Blog";
+
+  return {
+    title: `${post.title} | Blog`,
+    description: post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.excerpt,
+      url: `https://tusitio.com/blog/${post.slug}`,
+      type: "article",
+      publishedTime: post.date,
+      authors: [post.author],
+      images: [{ url: image }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.excerpt,
+      images: [image],
+    },
+  };
+}
+
+// --- Page ---
 export default async function BlogPostPage({ params }: BlogPageProps) {
   const { slug } = await params;
+  const { post, related } = await getPostAndRelated(slug);
 
-  const post = blogPosts.find((p) => p.slug === slug);
   if (!post) return notFound();
 
-  const relatedPosts = post.relatedPosts
-    ? blogPosts.filter((p) => post.relatedPosts?.includes(p.slug))
-    : [];
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 py-8 rounded-3xl">
-     
-      
-      <div className="max-w-4xl mx-auto px-4 md:px-6">
-        {/* Breadcrumb Navigation */}
-        <nav className="mb-8 text-sm text-gray-600">
-          <Link href="/" className="hover:text-blue-600 transition-colors duration-200">
-            Inicio
-          </Link>
-          <span className="mx-2">/</span>
-          <Link href="/blog" className="hover:text-blue-600 transition-colors duration-200">
-            Blog
-          </Link>
-          <span className="mx-2">/</span>
-          <span className="text-gray-900 font-medium truncate max-w-xs md:max-w-md inline-block align-middle">
-            {post.title}
-          </span>
-        </nav>
+    <article className="max-w-4xl mx-auto py-12">
+      {/* --- HERO --- */}
+      {post.featured_image && (
+        <div className="relative w-full h-96 rounded-2xl overflow-hidden shadow-lg">
+          <Image
+            src={post.featured_image}
+            alt={post.title}
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+      )}
 
-        <article className="bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-xl">
-          <header className="p-6 md:p-8 pb-4 md:pb-6">
-            <div className="flex flex-wrap items-center gap-2 text-sm text-gray-500 mb-4">
-              <span>{new Date(post.date).toLocaleDateString('es-ES', { year: 'numeric', month: 'long', day: 'numeric' })}</span>
-              <span className="hidden sm:inline">•</span>
-              <span>{Math.ceil(post.content.split(' ').length / 200)} min de lectura</span>
-            </div>
-            
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 leading-tight mb-4 break-words">
-              {post.title}
-            </h1>
-            
-            {post.author && (
-              <div className="flex items-center mt-6">
-                <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
-                  <span className="text-blue-600 font-semibold">
-                    {post.author.split(' ').map(n => n[0]).join('')}
-                  </span>
-                </div>
-                <div className="min-w-0">
-                  <p className="font-medium text-gray-900 truncate">{post.author}</p>
-                  {post.authorRole && <p className="text-sm text-gray-600 truncate">{post.authorRole}</p>}
-                </div>
-              </div>
-            )}
-          </header>
+      {/* --- HEADER --- */}
+      <header className="mt-8 mb-6">
+        <h1 className="text-4xl font-extrabold tracking-tight">{post.title}</h1>
+        <p className="text-gray-400 mt-2">{post.excerpt}</p>
 
-          {post.featuredImage && (
-            <div className="relative w-full h-64 md:h-96 overflow-hidden">
-              <Image
-                src={post.featuredImage}
-                alt={post.title}
-                fill
-                className="object-cover"
-                priority
-              />
-            </div>
-          )}
-
-          <div className="p-6 md:p-8 md:pt-6">
-            <div 
-              className="blog-content text-gray-800 max-w-none overflow-hidden"
-              dangerouslySetInnerHTML={{ __html: post.content }}
+        <div className="flex items-center gap-4 mt-4">
+          {post.author_image && (
+            <Image
+              src={post.author_image}
+              alt={post.author}
+              width={48}
+              height={48}
+              className="rounded-full"
             />
+          )}
+          <div>
+            <p className="font-medium">{post.author}</p>
+            {post.author_role && <p className="text-sm text-gray-500">{post.author_role}</p>}
+            <p className="text-xs text-gray-400">
+              {new Date(post.date).toLocaleDateString("es-ES", { year: "numeric", month: "long", day: "numeric" })} ·{" "}
+              {post.read_time || 5} min lectura
+            </p>
           </div>
+        </div>
+      </header>
 
-          <div className="px-6 md:px-8 pb-6 md:pb-8">
-            {post.tags && (
-              <div className="flex flex-wrap gap-2 mt-8">
-                {post.tags.map((tag, index) => (
-                  <span 
-                    key={index} 
-                    className="px-3 py-1 bg-gray-100 text-gray-900 text-sm rounded-full hover:bg-blue-100 hover:text-blue-700 transition-colors duration-200 break-words"
-                  >
-                    #{tag}
-                  </span>
-                ))}
-              </div>
-            )}
-            
-            <div className="flex flex-col sm:flex-row items-center justify-between mt-8 pt-6 border-t border-gray-200 gap-4">
+      {/* --- CONTENT --- */}
+      <div className="blog-content prose prose-invert lg:prose-lg max-w-none mt-8">
+        <div dangerouslySetInnerHTML={{ __html: post.content }} />
+      </div>
+
+      {/* --- TAGS --- */}
+      {post.tags && (
+        <div className="mt-8 flex flex-wrap gap-2">
+          {post.tags.map((tag) => (
+            <span key={tag} className="px-3 py-1 text-sm bg-emerald-900/50 rounded-full">
+              #{tag}
+            </span>
+          ))}
+        </div>
+      )}
+
+    <div className="flex flex-col sm:flex-row items-center justify-between mt-8 pt-6 border-t border-gray-200 gap-4">
               <Link 
                 href="/blog"
                 className="flex items-center text-blue-600 hover:text-blue-800 transition-colors duration-200 font-medium order-2 sm:order-1"
@@ -117,24 +163,55 @@ export default async function BlogPostPage({ params }: BlogPageProps) {
                 Volver al blog
               </Link>
               
-              <div className="order-1 sm:order-2">
+              
+                <div className="order-1 sm:order-2">
                 <ScrollToTop />
               </div>
-            </div>
-          </div>
-        </article>
+              </div>
 
-        {relatedPosts.length > 0 && (
-          <RelatedPosts relatedPosts={relatedPosts} />
-        )}
-      </div>
+       
+      
+
+      {/* --- RELATED POSTS --- */}
+{related.length > 0 && (
+  <section className="mt-12">
+    <h2 className="text-2xl font-bold mb-6">También te puede interesar</h2>
+    <div className="grid gap-6 sm:grid-cols-2">
+      {related.map((r) => (
+        <Link
+          key={r.slug}
+          href={`/blog/${r.slug}`}
+          className="p-4 bg-gray-900 rounded-xl hover:bg-gray-800 transition"
+        >
+          {r.featured_image && (
+            <Image
+              src={r.featured_image}
+              alt={r.title}
+              width={400}
+              height={200}
+              className="rounded-lg mb-3 object-cover"
+            />
+          )}
+          <h3 className="text-lg font-semibold">{r.title}</h3>
+          <p className="text-sm text-gray-400 line-clamp-2">{r.excerpt}</p>
+        </Link>
+      ))}
     </div>
+  </section>
+)}
+
+    </article>
+
+
   );
+  
 }
 
-// Generación estática
+
+
+
+// --- Static Params ---
 export async function generateStaticParams() {
-  return blogPosts.map((post) => ({
-    slug: post.slug,
-  }));
+  const posts = await getAllPosts();
+  return posts.map((post) => ({ slug: post.slug }));
 }

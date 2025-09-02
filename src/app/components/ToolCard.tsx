@@ -54,17 +54,22 @@ export default function ToolCard({
 
   const reviewsCount = reviews?.length ?? 0;
 
-  const priceLabel = useMemo(() => {
-    if (!pricing || pricing.length === 0) return undefined;
-    
-    // Verificar si hay un plan gratuito
-    const freePlan = pricing.find(p => p.price.toLowerCase().includes('free') || p.price.toLowerCase().includes('gratis'));
-    if (freePlan) return "Gratis";
-    
-    // Toma el plan más barato si detectas precio numérico simple; si no, el primero
-    const cheaper = pricing[0];
-    return `${cheaper.plan}: ${cheaper.price}`;
-  }, [pricing]);
+const priceLabel = useMemo(() => {
+  if (!pricing || pricing.length === 0) return undefined;
+
+  // Verificar si hay un plan gratuito
+  const freePlan = pricing.find(
+    (p) =>
+      p?.price?.toLowerCase().includes("free") ||
+      p?.price?.toLowerCase().includes("gratis")
+  );
+  if (freePlan) return "Gratis";
+
+  // Toma el primer plan válido
+  const cheaper = pricing.find((p) => p?.plan && p?.price);
+  return cheaper ? `${cheaper.plan}: ${cheaper.price}` : undefined;
+}, [pricing]);
+
 
   const handleOpenVideo = (e: MouseEvent) => {
     e.preventDefault();

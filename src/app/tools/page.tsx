@@ -1,8 +1,38 @@
 // app/tools/page.tsx
-import { tools } from "../data/tools";
 import ToolCard from "../components/ToolCard";
 
-export default function ToolsPage() {
+// Tipos de datos para las herramientas
+interface Tool {
+  id: number;
+  name: string;
+  slug: string;
+  description: string;
+  category?: string;
+  rating?: number;
+  tags?: string[];
+  logo?: string;
+}
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/api";
+
+// Función que obtiene todas las herramientas de la nueva ruta de la API
+async function getTools(): Promise<Tool[]> {
+  try {
+    const res = await fetch(`${API_URL}/tools`, { next: { revalidate: 3600 } });
+    if (!res.ok) {
+      throw new Error("Failed to fetch tools");
+    }
+    const data = await res.json();
+    return data.data || data;
+  } catch (error) {
+    console.error("Error fetching tools:", error);
+    return [];
+  }
+}
+
+export default async function ToolsPage() {
+  const allTools = await getTools();
+
   return (
     <main className="max-w-7xl mx-auto px-6 py-12">
       {/* Encabezado */}
@@ -17,9 +47,9 @@ export default function ToolsPage() {
       </header>
 
       {/* Grid de herramientas */}
-      {tools.length > 0 ? (
+      {allTools.length > 0 ? (
         <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {tools.map((tool) => (
+          {allTools.map((tool) => (
             <ToolCard
               key={tool.slug}
               name={tool.name}

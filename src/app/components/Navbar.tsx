@@ -4,12 +4,28 @@ import { useState, useMemo, useRef, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Menu, X, Search, Sparkles, ChevronDown, MoreHorizontal } from "lucide-react";
-import { tools } from "../data/tools";
-import { categories } from "../data/Categories";
+
 
 // ------------------------------------------------
 // Definición de tipos
 // ------------------------------------------------
+
+type Tool = {
+  slug: string;
+  name: string;
+  logo?: string;
+  description?: string;
+  category?: string;
+  tags?: string[];
+};
+
+type Category = {
+  slug: string;
+  name: string;
+  description?: string;
+};
+
+
 
 type Suggestion =
   | ({ kind: "tool" } & {
@@ -24,6 +40,8 @@ type Suggestion =
       name: string;
       description?: string;
     });
+
+
 
 // Modal para enlaces adicionales
 function MoreLinksModal({ isOpen, onClose, links }: { 
@@ -108,6 +126,8 @@ export default function Navbar() {
   const [moreLinksOpen, setMoreLinksOpen] = useState(false);
   const [useModal, setUseModal] = useState(false);
   const moreLinksRef = useRef<HTMLDivElement>(null);
+  const [tools, setTools] = useState<Tool[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
   
   const router = useRouter();
 
@@ -123,6 +143,7 @@ export default function Navbar() {
     { href: "/blog", label: "Blog" },
     //{ href: "/cursos", label: "Cursos" },
     { href: "/comunidad", label: "Comunidad" },
+    { href: "/login", label: "login" },
   ];
 
   
@@ -157,9 +178,36 @@ useEffect(() => {
     return () => window.removeEventListener('resize', checkScreenSize);
   }, []);
 
-  // ------------------------------------------------
+
+
+
+ // Llamar API para obtener datos
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        // Aquí pon tus endpoints reales 👇
+        const toolsRes = await fetch("http://127.0.0.1:8000/api/tools");
+        const categoriesRes = await fetch("http://127.0.0.1:8000/api/categories");
+
+        const toolsData = await toolsRes.json();
+        const categoriesData = await categoriesRes.json();
+
+          setTools(toolsData.data ?? []);
+          
+      setCategories(categoriesData ?? []);
+   
+
+      } catch (error) {
+        console.error("Error cargando datos:", error);
+      }
+    }
+    fetchData();
+  }, []);
+
+
   // Función para manejar la búsqueda
   // ------------------------------------------------
+   // Buscar
   const handleSearch = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
     if (!query.trim()) return;
@@ -173,6 +221,8 @@ useEffect(() => {
   // ------------------------------------------------
   // Generar sugerencias (protegido contra undefined)
   // ------------------------------------------------
+ 
+  // Filtrar sugerencias dinámicamente
   const allSuggestions: Suggestion[] = useMemo(() => {
     if (!query.trim()) return [];
     const q = query.toLowerCase();
@@ -192,17 +242,11 @@ useEffect(() => {
           (t.description?.toLowerCase() || "").includes(q) ||
           t.tags?.some((tag: string) => (tag?.toLowerCase() || "").includes(q))
       )
-      .map((t) => ({
-        kind: "tool" as const,
-        slug: t.slug,
-        name: t.name || "Sin nombre",
-        logo: t.logo,
-        description: t.description,
-        category: t.category,
-      }));
+      .map((t) => ({ kind: "tool" as const, ...t }));
 
     return [...catMatches.slice(0, 3), ...toolMatches.slice(0, 7)].slice(0, 8);
-  }, [query]);
+  }, [query, tools, categories])
+
 
   // ------------------------------------------------
   // Navegar a la sugerencia seleccionada
