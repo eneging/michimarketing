@@ -57,9 +57,7 @@ const BlogSkeleton = () => (
 // --- COMPONENTE QUE OBTIENE Y MUESTRA LOS POSTS ---
 async function BlogPosts() {
 
- const API_URL =
-  process.env.NEXT_PUBLIC_API_URL ??
-  "https://michimarketing.com"; // o dejar vacío
+ const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 
   
   
