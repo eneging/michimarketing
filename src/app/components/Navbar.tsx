@@ -179,15 +179,15 @@ useEffect(() => {
   }, []);
 
 
-
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
  // Llamar API para obtener datos
   useEffect(() => {
     async function fetchData() {
       try {
         // Aquí pon tus endpoints reales 👇
-        const toolsRes = await fetch("http://127.0.0.1:8000/api/tools");
-        const categoriesRes = await fetch("http://127.0.0.1:8000/api/categories");
+        const toolsRes = await fetch(`${API_URL}/api/tools`);
+        const categoriesRes = await fetch(`${API_URL}/api/categories`);
 
         const toolsData = await toolsRes.json();
         const categoriesData = await categoriesRes.json();
@@ -202,7 +202,7 @@ useEffect(() => {
       }
     }
     fetchData();
-  }, []);
+  }, [API_URL]);
 
 
   // Función para manejar la búsqueda

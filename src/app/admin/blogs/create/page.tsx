@@ -42,7 +42,7 @@ export default function CreateBlogPage() {
   const [token, setToken] = useState<string | null>(null);
   const [showMoreTools, setShowMoreTools] = useState(false);
   const router = useRouter();
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000";
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // 🔹 Obtener token solo en el cliente

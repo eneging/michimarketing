@@ -17,13 +17,15 @@ export default function Home() {
   const [page, setPage] = useState(1);
   const [pagination, setPagination] = useState<any>(null);
 
+ const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
   // 🚀 cargar categorías
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/categories")
+    fetch(`${API_URL}/api/categories`)
       .then((res) => res.json())
       .then((data) => setCategories(data.data ?? []))
       .catch((err) => console.error(err));
-  }, []);
+  }, [API_URL]);
 
   // 🚀 cargar herramientas según filtros + página
   useEffect(() => {
@@ -38,7 +40,7 @@ export default function Home() {
         if (selectedPrice) params.append("tag", selectedPrice);
 
         const res = await fetch(
-          `http://127.0.0.1:8000/api/tools?${params.toString()}`
+          `${API_URL}/api/tools?${params.toString()}`
         );
         const data = await res.json();
 
@@ -52,7 +54,7 @@ export default function Home() {
     }
 
     fetchTools();
-  }, [searchTerm, selectedCategory, selectedPrice, page]);
+  }, [searchTerm, selectedCategory, selectedPrice, page, API_URL]);
 
   const featuredTools = tools.slice(0, 3);
 

@@ -48,7 +48,7 @@ interface CategoryPageProps {
   params: Promise<CategoryPageParams>;
 }
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/api";
+const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 // Función para obtener los datos de la categoría y sus herramientas desde la API (Optimizado)
 async function getCategoryAndTools(slug: string): Promise<{ category: Category | null; tools: Tool[] }> {
@@ -202,7 +202,7 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
 // Función para generar rutas estáticas
 export async function generateStaticParams() {
-  const API_URL = process.env.NEXT_PUBLIC_API_URL || "http://127.0.0.1:8000/api";
+  const API_URL = process.env.NEXT_PUBLIC_API_URL;
   
   const res = await fetch(`${API_URL}/categories`, { next: { revalidate: 3600 } });
   const data = await res.json();
