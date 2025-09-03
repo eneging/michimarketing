@@ -1,0 +1,26 @@
+{
+  "name": "MichiMarketing - AI Tools Directory",
+  "short_name": "MichiMarketing",
+  "description": "Descubre las mejores herramientas de inteligencia artificial, apps y software para 2025. Explora categorías, reseñas y tendencias en MichiMarketing.",
+  "lang": "es-ES",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#000000",
+  "theme_color": "#ffffff",
+  "icons": [
+    {
+      "src": "",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

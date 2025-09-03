@@ -5,8 +5,9 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 //import Script from "next/script";
-import AdSense from "./components/AdSense";
+//import AdSense from "./components/AdSense";
 import BottomNav from "./components/BottomNav";
+
 //import AdBanner from "./components/Adbanner";
 
 // Fuentes
@@ -83,16 +84,24 @@ export default function RootLayout({
 
 <head>
 <meta name="google-adsense-account" content="ca-pub-9559644099127130"></meta>
-  <AdSense pid="pub-9559644099127130"></AdSense>
+   <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXX"
+          crossOrigin="anonymous"
+        />
+ 
 </head>
       
       <body
       
+
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white font-sans`}
       >
+
+
+    
         <Navbar></Navbar>
 
-          
 
         <div 
         
