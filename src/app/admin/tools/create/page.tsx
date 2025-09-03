@@ -41,7 +41,7 @@ interface ToolFormData {
 
 export default function CreateToolPage() {
   const router = useRouter();
-  const API_URL = "https://api.michimarketing.com";
+const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 
   const [formData, setFormData] = useState<ToolFormData>({
     name: "",

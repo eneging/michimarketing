@@ -11,7 +11,8 @@ export default function EditToolPage() {
   const [categories, setCategories] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+  const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 
   // Efecto para obtener la herramienta y las categorías
   useEffect(() => {
