@@ -5,7 +5,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL!
  
 export async function deleteBlog(id: number) {
   const token = getToken();
-  const res = await fetch(`${API_URL}/blog-posts/${id}`, {
+  const res = await fetch(`${API_URL}/api/blog-posts/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -19,7 +19,7 @@ export async function deleteBlog(id: number) {
 
 export async function updateBlog(id: number, data: any) {
   const token = getToken();
-  const res = await fetch(`${API_URL}/blog-posts/${id}`, {
+  const res = await fetch(`${API_URL}/api/blog-posts/${id}`, {
     method: "PUT",
     headers: {
       Authorization: `Bearer ${token}`,
