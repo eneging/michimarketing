@@ -47,14 +47,13 @@ interface CategoryPageParams {
 interface CategoryPageProps {
   params: Promise<CategoryPageParams>;
 }
-
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 
 // Función para obtener los datos de la categoría y sus herramientas desde la API (Optimizado)
 async function getCategoryAndTools(slug: string): Promise<{ category: Category | null; tools: Tool[] }> {
   try {
     // 1. Obtener la categoría primero para obtener su ID
-    const categoryRes = await fetch(`${API_URL}/categories/${slug}`, { next: { revalidate: 3600 } });
+    const categoryRes = await fetch(`${API_URL}/api/categories/${slug}`, { next: { revalidate: 3600 } });
 
     if (!categoryRes.ok) {
       return { category: null, tools: [] };
@@ -65,7 +64,7 @@ async function getCategoryAndTools(slug: string): Promise<{ category: Category |
 
     // 2. Usar el ID de la categoría para filtrar las herramientas.
     // Asume que tu API de herramientas puede filtrar por category_id.
-    const toolsRes = await fetch(`${API_URL}/tools?category_id=${category.id}`, { next: { revalidate: 3600 } });
+    const toolsRes = await fetch(`${API_URL}/api/tools?category_id=${category.id}`, { next: { revalidate: 3600 } });
     const toolsData = await toolsRes.json();
     const tools = toolsData.data || toolsData;
 
@@ -202,9 +201,9 @@ export default async function CategoryPage({ params }: CategoryPageProps) {
 
 // Función para generar rutas estáticas
 export async function generateStaticParams() {
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+ 
   
-  const res = await fetch(`${API_URL}/categories`, { next: { revalidate: 3600 } });
+  const res = await fetch(`${API_URL}/api/categories`, { next: { revalidate: 3600 } });
   const data = await res.json();
   const categories: Category[] = data.data || data;
 
@@ -218,7 +217,7 @@ export async function generateMetadata({ params }: CategoryPageProps) {
   const { slug } = await params;
   
   // Optimizamos la llamada para obtener solo la categoría, no todas las herramientas
-  const res = await fetch(`${API_URL}/categories/${slug}`, { next: { revalidate: 3600 } });
+  const res = await fetch(`${API_URL}/api/categories/${slug}`, { next: { revalidate: 3600 } });
   if (!res.ok) {
     return {
       title: "Categoría no encontrada",

@@ -55,7 +55,7 @@ export default function EditBlogPage() {
     setToken(localStorage.getItem("token"));
   }, []);
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 
   // 🔹 Cargar blog existente
   useEffect(() => {

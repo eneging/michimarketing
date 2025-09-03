@@ -54,14 +54,16 @@ export default function CategoriesPage() {
   const [tools, setTools] = useState<Tool[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+
+const API_URL = process.env.NEXT_PUBLIC_API_URL!;
+
 
   useEffect(() => {
     async function fetchData() {
       try {
         const [catRes, toolsRes] = await Promise.all([
-          fetch(`${API_URL}/categories`),
-          fetch(`${API_URL}/tools`),
+          fetch(`${API_URL}/api/categories`),
+          fetch(`${API_URL}/api/tools`),
         ]);
 
         if (!catRes.ok || !toolsRes.ok) throw new Error("Error en la API");

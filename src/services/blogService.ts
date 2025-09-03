@@ -1,7 +1,7 @@
 // src/services/blogService.ts
 import { getToken } from "./authService";
 
- const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL!
  
 export async function deleteBlog(id: number) {
   const token = getToken();

@@ -24,7 +24,7 @@ export default function BlogsAdminPage() {
   const [blogs, setBlogs] = useState<BlogPost[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL 
+const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 
   useEffect(() => {
     async function fetchBlogs() {

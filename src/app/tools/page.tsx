@@ -13,15 +13,19 @@ interface Tool {
   logo?: string;
 }
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
-// Función que obtiene todas las herramientas de la nueva ruta de la API
+const API_URL = process.env.NEXT_PUBLIC_API_URL!;
+
 async function getTools(): Promise<Tool[]> {
   try {
-    const res = await fetch(`${API_URL}/tools`, { next: { revalidate: 3600 } });
+    const res = await fetch(`${API_URL}/api/tools`, {
+      next: { revalidate: 3600 },
+    });
+
     if (!res.ok) {
       throw new Error("Failed to fetch tools");
     }
+
     const data = await res.json();
     return data.data || data;
   } catch (error) {

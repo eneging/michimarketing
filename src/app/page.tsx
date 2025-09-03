@@ -17,7 +17,7 @@ export default function Home() {
   const [page, setPage] = useState(1);
   const [pagination, setPagination] = useState<any>(null);
 
- const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 
   // 🚀 cargar categorías
   useEffect(() => {

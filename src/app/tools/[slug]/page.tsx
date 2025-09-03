@@ -63,7 +63,7 @@ interface ToolPageProps {
   params: Promise<ToolPageParams>;
 }
 // URL de la API
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
+const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 // ----------------- ToolMainContent -----------------
 function ToolMainContent({ tool }: { tool: Tool }) {
   return (
@@ -297,7 +297,7 @@ async function RelatedToolsSection({ toolId, categoryId }: { toolId: number, cat
 // ----------------- Data Fetching Functions -----------------
 async function fetchToolBySlug(slug: string): Promise<Tool | null> {
   try {
-    const res = await fetch(`${API_URL}/tools/by-slug/${encodeURIComponent(slug)}`, {
+    const res = await fetch(`${API_URL}/api/tools/by-slug/${encodeURIComponent(slug)}`, {
       next: { revalidate: 3600 },
     });
     if (!res.ok) {
@@ -317,7 +317,7 @@ async function fetchToolBySlug(slug: string): Promise<Tool | null> {
 }
 async function fetchAllToolSlugs(): Promise<string[]> {
   try {
-    const res = await fetch(`${API_URL}/tools`, {
+    const res = await fetch(`${API_URL}/api/tools`, {
       next: { revalidate: 3600 },
     });
     if (!res.ok) {
@@ -333,7 +333,7 @@ async function fetchAllToolSlugs(): Promise<string[]> {
 }
 async function fetchRelatedTools(toolId: number, categoryId: number): Promise<Tool[]> {
   try {
-    const res = await fetch(`${API_URL}/tools/${toolId}/related`, {
+    const res = await fetch(`${API_URL}/api/tools/${toolId}/related`, {
       next: { revalidate: 3600 },
     });
     if (res.ok) {
@@ -341,7 +341,7 @@ async function fetchRelatedTools(toolId: number, categoryId: number): Promise<To
       return relatedTools;
     }
     console.log("Related endpoint not available, using fallback method");
-    const allToolsRes = await fetch(`${API_URL}/tools`, {
+    const allToolsRes = await fetch(`${API_URL}/api/tools`, {
       next: { revalidate: 3600 },
     });
     if (!allToolsRes.ok) {

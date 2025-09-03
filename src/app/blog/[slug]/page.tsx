@@ -31,10 +31,10 @@ interface BlogPageProps {
 }
 
 export const dynamic = "force-static";
-
+const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 // --- API helpers ---
 async function getAllPosts(): Promise<BlogPost[]> {
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  
   try {
     const res = await fetch(`${API_URL}/api/blog-posts?per_page=100`, { next: { revalidate: 3600 } });
     if (!res.ok) return [];
@@ -60,7 +60,7 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
 
   if (!post) return { title: "Post no encontrado" };
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+ 
   const image = post.featured_image
     ? post.featured_image.startsWith("http")
       ? post.featured_image

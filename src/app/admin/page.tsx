@@ -42,7 +42,7 @@ export default function AdminPage() {
 
       {/* Aquí podrías añadir más componentes como tablas o gráficos */}
       <div className="mt-12">
-        <h2 className="text-xl font-semibold text-white">Todos los elementos para editar en la pagina</h2>
+        <h2 className="text-xl font-semibold text-white">Todos los elementos para editar en la paginas</h2>
         <div className="mt-4  rounded-lg border border-neutral-800 bg-neutral-900/50 p-4">
           
 

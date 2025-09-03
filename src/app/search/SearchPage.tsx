@@ -12,8 +12,7 @@ type Tool = {
   category?: { id: number; name: string; slug: string };
 };
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL;
-
+const API_URL = process.env.NEXT_PUBLIC_API_URL!
 
 export default function SearchPage() {
   const searchParams = useSearchParams();
@@ -27,7 +26,7 @@ export default function SearchPage() {
 
     setLoading(true);
 
-    fetch(`${API_URL}/tools?search=${encodeURIComponent(q)}`)
+    fetch(`${API_URL}/api/tools?search=${encodeURIComponent(q)}`)
       .then((res) => res.json())
       .then((data) => {
         setResults(data.data ?? []); // 👈 Laravel manda { data: [...] }

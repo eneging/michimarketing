@@ -62,7 +62,7 @@ export default function ToolsAdminPage() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [toolToDeleteId, setToolToDeleteId] = useState<number | null>(null);
 
-  const API_URL = process.env.NEXT_PUBLIC_API_URL;
+  const API_URL = "https://api.michimarketing.com";
 
   useEffect(() => {
     const token = localStorage.getItem("token");
