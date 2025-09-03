@@ -5,7 +5,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 
 // 🔐 LOGIN
 export async function login(email: string, password: string) {
-  const res = await fetch(`${API_URL}/login`, {
+  const res = await fetch(`${API_URL}/api/login`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password }),
@@ -22,7 +22,7 @@ export async function register(
   password: string,
   password_confirmation: string
 ) {
-  const res = await fetch(`${API_URL}/register`, {
+  const res = await fetch(`${API_URL}/api/register`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ name, email, password, password_confirmation }),
