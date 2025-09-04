@@ -64,7 +64,7 @@ async function BlogPosts() {
   let blogPosts: BlogPost[] = [];
 
   try {
-    const res = await fetch(`${API_URL}/api/blog-posts?per_page=100`, {
+    const res = await fetch(`${API_URL}/api/blog-posts`, {
   next: { revalidate: 3600 }, // se regenera cada hora
 });
      if (!res.ok) {

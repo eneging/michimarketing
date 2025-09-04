@@ -5,6 +5,8 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import ArrayInput from "../../../components/ArrayInput";
+import { CldUploadWidget } from "next-cloudinary";
+import Image from "next/image";
 
 interface ToolFormData {
   name: string;
@@ -214,6 +216,27 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL!;
     return <p className="text-center py-10">Cargando...</p>;
   }
 
+    const handleLogoUpload = (result: any) => {
+    if (result.event === "success") {
+      const url = result.info.secure_url;
+      setFormData((prev) => ({
+        ...prev,
+        logo: url,
+      }));
+    }
+  };
+
+
+  const handleImageUpload = (result: any) => {
+  if (result.event === "success") {
+    const url = result.info.secure_url;
+    setFormData((prev) => ({
+      ...prev,
+      image: url,
+    }));
+  }
+};
+
   return (
     <div className="max-w-4xl mx-auto py-12 px-4 md:px-6">
       <h1 className="text-3xl font-bold mb-6 text-white text-center md:text-left">Crear Herramienta</h1>
@@ -300,7 +323,10 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL!;
                 className="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
             </div>
-            <div>
+
+
+
+           {/* <div>
               <label htmlFor="logo" className="block text-sm font-medium text-gray-400 mb-1">URL Logo</label>
               <input
                 type="text"
@@ -310,8 +336,54 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL!;
                 onChange={handleChange}
                 className="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
+            </div>*/}
+
+
+
+
+
+
+ <div>
+              <label className="block text-sm font-medium text-gray-400 mb-1">
+                Logo de la Herramienta
+              </label>
+              <CldUploadWidget
+              uploadPreset="tools_unsigned"
+                onSuccess={handleLogoUpload}
+                
+              >
+                {({ open }) => {
+                  return (
+                    <button
+                      type="button"
+                      onClick={() => open()}
+                      className="w-full py-2 px-4 rounded-lg bg-gray-800 border border-gray-700 text-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors"
+                    >
+                      Subir Logo
+                    </button>
+                  );
+                }}
+              </CldUploadWidget>
+              {/* 🆕 Muestra el logo subido si existe */}
+              {formData.logo && (
+                <div className="mt-4">
+                  <Image
+                    src={formData.logo}
+                    alt="Logo preview"
+                    width={100}
+                    height={100}
+                    className="rounded-full mx-auto"
+                  />
+                </div>
+              )}
             </div>
-            <div>
+
+
+
+
+
+
+    {/*}     <div>
               <label htmlFor="image" className="block text-sm font-medium text-gray-400 mb-1">URL Imagen</label>
               <input
                 type="text"
@@ -321,7 +393,57 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL!;
                 onChange={handleChange}
                 className="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
               />
-            </div>
+            </div> */}
+            
+
+
+
+
+<div>
+  <label className="block text-sm font-medium text-gray-400 mb-1">
+    Imagen Principal
+  </label>
+  <CldUploadWidget
+    uploadPreset="tools_unsigned"
+    onSuccess={handleImageUpload}
+  >
+    {({ open }) => {
+      return (
+        <button
+          type="button"
+          onClick={() => open()}
+          className="w-full py-2 px-4 rounded-lg bg-gray-800 border border-gray-700 text-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors"
+        >
+          Subir Imagen
+        </button>
+      );
+    }}
+  </CldUploadWidget>
+  {/* Opcional: Muestra la imagen principal si ya se ha subido */}
+  {formData.image && (
+    <div className="mt-4">
+      <Image
+        src={formData.image}
+        alt="Main image preview"
+        width={300}
+        height={200}
+        className="rounded-lg object-cover"
+      />
+    </div>
+  )}
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
             <div>
               <label htmlFor="tutorial_video" className="block text-sm font-medium text-gray-400 mb-1">URL Video Tutorial</label>
               <input

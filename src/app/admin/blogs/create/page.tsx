@@ -2,6 +2,8 @@
 
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { CldUploadWidget } from "next-cloudinary";
+import Image from "next/image";
 
 // 🔹 Interfaz para los datos del blog
 interface BlogFormData {
@@ -58,6 +60,25 @@ export default function CreateBlogPage() {
     }
   }, [formData.content]);
 
+  // Funciones de manejo de subida de imágenes
+  function handleAuthorImageUpload(result: any) {
+    if (result.event === "success") {
+      setFormData((prev) => ({
+        ...prev,
+        author_image: result.info.secure_url,
+      }));
+    }
+  }
+
+  function handleFeaturedImageUpload(result: any) {
+    if (result.event === "success") {
+      setFormData((prev) => ({
+        ...prev,
+        featured_image: result.info.secure_url,
+      }));
+    }
+  }
+
   function generateSlug(title: string): string {
     return title
       .toLowerCase()
@@ -72,7 +93,7 @@ export default function CreateBlogPage() {
       new URL(string);
       return true;
     } catch (e) {
-       console.error("URL inválida:", e);
+      console.error("URL inválida:", e);
       return false;
     }
   }
@@ -100,7 +121,6 @@ export default function CreateBlogPage() {
     setFormData((prev) => ({ ...prev, related_posts }));
   }
 
-  // Función para insertar contenido en el textarea
   function handleInsert(content: string, wrapSelection: boolean = false) {
     const textarea = textareaRef.current;
     if (!textarea) return;
@@ -124,7 +144,6 @@ export default function CreateBlogPage() {
 
     setFormData((prev) => ({ ...prev, content: newText }));
     
-    // Enfocar y restaurar posición del cursor después de la actualización
     setTimeout(() => {
       if (textareaRef.current) {
         textareaRef.current.focus();
@@ -134,13 +153,11 @@ export default function CreateBlogPage() {
     }, 0);
   }
 
-  // Función para insertar código con resaltado de sintaxis
   function insertCode(language: string = "") {
     const codeBlock = `\n\`\`\`${language}\n// Escribe tu código aquí\n\`\`\`\n`;
     handleInsert(codeBlock);
   }
 
-  // Función para insertar una tabla
   function insertTable() {
     const table = `
 <table>
@@ -208,6 +225,7 @@ export default function CreateBlogPage() {
       setLoading(false);
     }
   }
+
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-8 md:py-12">
@@ -291,16 +309,36 @@ export default function CreateBlogPage() {
             />
           </div>
           
+          {/* Campo para la foto del autor, ahora con el widget */}
           <div>
-            <label htmlFor="author_image" className="block text-sm font-medium mb-1">URL foto del autor</label>
-            <input
-              id="author_image"
-              name="author_image"
-              placeholder="URL foto del autor"
-              value={formData.author_image}
-              onChange={handleChange}
-              className="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-            />
+            <label className="block text-sm font-medium mb-1">URL foto del autor</label>
+            <CldUploadWidget
+              uploadPreset="blog_unsineg" // Reemplaza "tu_upload_preset" con el nombre de tu preset
+              onSuccess={handleAuthorImageUpload}
+            >
+              {({ open }) => {
+                return (
+                  <button
+                    type="button"
+                    onClick={() => open()}
+                    className="w-full py-2 px-4 rounded-lg bg-gray-800 border border-gray-700 text-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors"
+                  >
+                    Subir foto del autor
+                  </button>
+                );
+              }}
+            </CldUploadWidget>
+            {formData.author_image && (
+              <div className="mt-4">
+                <Image
+                  src={formData.author_image}
+                  alt="Author preview"
+                  width={100}
+                  height={100}
+                  className="rounded-full object-cover"
+                />
+              </div>
+            )}
           </div>
         </div>
 
@@ -317,16 +355,36 @@ export default function CreateBlogPage() {
             />
           </div>
           
+          {/* Campo para la imagen destacada, ahora con el widget */}
           <div>
-            <label htmlFor="featured_image" className="block text-sm font-medium mb-1">Imagen destacada (URL)</label>
-            <input
-              id="featured_image"
-              name="featured_image"
-              placeholder="Imagen destacada (URL)"
-              value={formData.featured_image}
-              onChange={handleChange}
-              className="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-            />
+            <label className="block text-sm font-medium mb-1">Imagen destacada</label>
+            <CldUploadWidget
+              uploadPreset="blog_unsineg" // Reemplaza "tu_upload_preset"
+              onSuccess={handleFeaturedImageUpload}
+            >
+              {({ open }) => {
+                return (
+                  <button
+                    type="button"
+                    onClick={() => open()}
+                    className="w-full py-2 px-4 rounded-lg bg-gray-800 border border-gray-700 text-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors"
+                  >
+                    Subir Imagen destacada
+                  </button>
+                );
+              }}
+            </CldUploadWidget>
+            {formData.featured_image && (
+              <div className="mt-4">
+                <Image
+                  src={formData.featured_image}
+                  alt="Featured image preview"
+                  width={300}
+                  height={200}
+                  className="rounded-lg object-cover"
+                />
+              </div>
+            )}
           </div>
           
           <div>
@@ -555,7 +613,7 @@ export default function CreateBlogPage() {
                   </button>
                   <button
                     type="button"
-                    onClick={() => handleInsert('| Columna 1 | Columna 2 |\n|-----------|-----------|\n| Celda 1   | Celda 2   |\n')}
+                    onClick={() => handleInsert('| Columna 1 | Columna 2 |\n|-----------|-----------|\n| Celda 1   | Celda 2   |\n')}
                     className="px-3 py-1.5 text-sm bg-gray-700 rounded-md hover:bg-gray-600 transition"
                     title="Tabla Markdown"
                   >
