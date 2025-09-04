@@ -1,6 +1,5 @@
 "use client";
 
-import { motion } from "framer-motion";
 import { ArrowRight, Sparkles } from "lucide-react";
 import Image from "next/image";
 
@@ -30,54 +29,34 @@ export default function Hero() {
       {/* Contenido */}
       <div className="relative max-w-6xl mx-auto px-6 py-32 text-center text-white z-10">
         {/* Badge */}
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-sm font-medium mb-8 will-change-transform will-change-opacity"
-        >
+        <div className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-blue-500/10 border border-blue-500/30 text-blue-300 text-sm font-medium mb-8">
           <Sparkles size={14} />
           <span>Nuevas herramientas añadidas</span>
-        </motion.div>
+        </div>
 
         {/* Título */}
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, ease: "easeOut" }}
-          className="block text-5xl md:text-7xl font-bold mb-6 leading-tight tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300 will-change-transform will-change-opacity"
-        >
+        <h1 className="block text-5xl md:text-7xl font-bold mb-6 leading-tight tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-300">
           Encuentra las{" "}
-          <span className="inline-block bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent will-change-transform will-change-opacity">
+          <span className="inline-block bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
             mejores herramientas
           </span>
-        </motion.h1>
+        </h1>
 
         {/* Subtítulo */}
-        <motion.p
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="block text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed font-light will-change-transform will-change-opacity"
-        >
+        <p className="block text-xl md:text-2xl text-gray-300 mb-10 max-w-3xl mx-auto leading-relaxed font-light">
           MichiMarketing centraliza los recursos de{" "}
-          <span className="inline-block font-medium text-white bg-gradient-to-r from-pink-500/20 to-purple-500/20 px-1.5 py-0.5 rounded will-change-transform will-change-opacity">
+          <span className="inline-block font-medium text-white bg-gradient-to-r from-pink-500/20 to-purple-500/20 px-1.5 py-0.5 rounded">
             marketing digital
           </span>{" "}
           y{" "}
-          <span className="inline-block font-medium text-white bg-gradient-to-r from-blue-500/20 to-cyan-500/20 px-1.5 py-0.5 rounded will-change-transform will-change-opacity">
+          <span className="inline-block font-medium text-white bg-gradient-to-r from-blue-500/20 to-cyan-500/20 px-1.5 py-0.5 rounded">
             herramientas de IA
           </span>{" "}
           en un solo lugar.
-        </motion.p>
+        </p>
 
         {/* Botones */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, delay: 0.4 }}
-          className="flex flex-col sm:flex-row justify-center gap-4 items-center will-change-transform will-change-opacity"
-        >
+        <div className="flex flex-col sm:flex-row justify-center gap-4 items-center">
           <a
             href="categories"
             className="group relative px-8 py-4 bg-white text-black font-medium rounded-full flex items-center gap-2 transition-all hover:shadow-lg hover:shadow-white/20 hover:scale-105"
@@ -94,17 +73,12 @@ export default function Hero() {
           >
             Únete a la comunidad
           </a>
-        </motion.div>
+        </div>
 
         {/* Texto secundario */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.8 }}
-          className="block text-gray-400 text-sm mt-8 will-change-transform will-change-opacity"
-        >
+        <p className="block text-gray-400 text-sm mt-8">
           Totalmente gratuito • Actualizado semanalmente
-        </motion.p>
+        </p>
       </div>
 
       {/* Efecto de brillo */}
