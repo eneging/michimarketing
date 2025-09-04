@@ -32,15 +32,7 @@ export default function BottomNav() {
           <QrCode className="w-5 h-5" />
           <span className="text-[11px]">Generador QR</span>
         </Link>
-{/*
-        <Link
-          href="/comparativas"
-          className="flex flex-col items-center text-gray-400 hover:text-blue-400 transition"
-        >
-          <Layers className="w-5 h-5" />
-          <span className="text-[11px]">Comparar</span>
-        </Link>
-        */}
+
 
         <Link
           href="/comunidad"
