@@ -6,9 +6,12 @@ import { FaYoutube, FaTiktok, FaInstagram, FaFacebook, FaDiscord } from "react-i
 
 export default function ComunidadPage() {
   return (
-    <div className="bg-gray-950 min-h-screen text-gray-200">
+    <div className=" min-h-screen text-gray-200">
       {/* Hero */}
-      <section className="text-center py-16 bg-gradient-to-b from-purple-800/20 to-gray-950">
+      <section className="text-center py-16
+       
+       
+       ">
         <h1 className="text-4xl font-extrabold text-white drop-shadow-lg">
           🐾 Comunidad MichiMarketing
         </h1>

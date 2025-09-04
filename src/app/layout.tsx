@@ -23,8 +23,8 @@ const geistMono = Geist_Mono({
 
 // Metadatos globales (SEO + Redes sociales)
 export const metadata: Metadata = {
-   metadataBase: new URL("https://michimarketing.com"),
-   
+  metadataBase: new URL("https://michimarketing.com"),
+
   title: {
     default: "MichiMarketing - AI Tools Directory",
     template: "%s | MichiMarketing",
@@ -81,52 +81,42 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es">
-
-<head>
-<meta name="google-adsense-account" content="ca-pub-9559644099127130"></meta>
-   <script
+      <head>
+        <meta
+          name="google-adsense-account"
+          content="ca-pub-9559644099127130"
+        ></meta>
+        <script
           async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXX"
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9559644099127130"
           crossOrigin="anonymous"
         />
- 
-</head>
-      
-      <body
-      
+      </head>
 
+      <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white font-sans`}
       >
-
-
-    
         <Navbar></Navbar>
 
-
-        <div 
-        
-        className="flex flex-col lg:flex-row max-w-screen-2xl mx-auto px-6 py-16 gap-8">
+        <div className="flex flex-col lg:flex-row max-w-screen-2xl mx-auto px-6 py-16 gap-8">
           {/* Sidebar Izquierdo (Publicidad) */}
-          
- {/*  <aside className="hidden lg:block w-64">
-          <div className="sticky top-28 bg-neutral-900 rounded-xl border border-neutral-800 p-6 shadow-sm">
-              <h2 className="text-xl font-bold mb-4 text-neutral-200">Publicidad</h2>
-              <div className="space-y-6">
-                 Bloque de anuncio 1 */}
 
-               
-            {/*    
-              </div>
+          <aside className="hidden lg:block w-40">
+            <div className="sticky top-28 bg-neutral-900 rounded-xl border border-neutral-800 p-6 shadow-sm">
+              <h2 className="text-xl font-bold mb-4 text-neutral-200">
+                Publicidad
+              </h2>
+              <div className="space-y-6">Bloque de anuncio 1</div>
             </div>
           </aside>
 
-          Contenido central */}
           <main className="flex-1 min-h-screen">{children}</main>
 
-          {/* Sidebar Derecho (Recomendados) 
-          <aside className="hidden lg:block w-64">
+          <aside className="hidden lg:block w-50">
             <div className="sticky top-28 bg-neutral-900 rounded-xl border border-neutral-800 p-6 shadow-sm">
-              <h2 className="text-xl font-bold mb-4 text-neutral-200">Recomendados</h2>
+              <h2 className="text-xl font-bold mb-4 text-neutral-200">
+                Recomendados
+              </h2>
               <ul className="space-y-4 text-sm">
                 <li className="hover:text-blue-400 cursor-pointer transition-colors py-1 border-b border-neutral-800 last:border-b-0">
                   🚀 Top herramientas de IA
@@ -142,11 +132,9 @@ export default function RootLayout({
                 </li>
               </ul>
             </div>
-          </aside>*/}
-
-
+          </aside>
         </div>
-<BottomNav></BottomNav>
+        <BottomNav></BottomNav>
         <Footer></Footer>
       </body>
     </html>

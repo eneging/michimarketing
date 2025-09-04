@@ -126,9 +126,9 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL!;
                 <button
                   disabled={pagination.current_page === 1}
                   onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
-                  className="px-4 py-2 rounded-lg border bg-white disabled:opacity-50"
+                  className="px-4 py-2 rounded-lg border disabled:opacity-50"
                 >
-                  ⬅️ Anterior
+                  Anterior
                 </button>
                 <span>
                   Página {pagination.current_page} de {pagination.last_page}
@@ -140,9 +140,9 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL!;
                       Math.min(prev + 1, pagination.last_page)
                     )
                   }
-                  className="px-4 py-2 rounded-lg border bg-white disabled:opacity-50"
+                  className="px-4 py-2 rounded-lg border disabled:opacity-50"
                 >
-                  Siguiente ➡️
+                  Siguiente 
                 </button>
               </div>
             )}
