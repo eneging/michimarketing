@@ -99,40 +99,11 @@ export default function RootLayout({
         <Navbar></Navbar>
 
         <div className="flex flex-col lg:flex-row max-w-screen-2xl mx-auto px-6 py-16 gap-8">
-          {/* Sidebar Izquierdo (Publicidad) */}
-
-          <aside className="hidden lg:block w-40">
-            <div className="sticky top-28 bg-neutral-900 rounded-xl border border-neutral-800 p-6 shadow-sm">
-              <h2 className="text-xl font-bold mb-4 text-neutral-200">
-                Publicidad
-              </h2>
-              <div className="space-y-6">Bloque de anuncio 1</div>
-            </div>
-          </aside>
+         
 
           <main className="flex-1 min-h-screen">{children}</main>
 
-          <aside className="hidden lg:block w-50">
-            <div className="sticky top-28 bg-neutral-900 rounded-xl border border-neutral-800 p-6 shadow-sm">
-              <h2 className="text-xl font-bold mb-4 text-neutral-200">
-                Recomendados
-              </h2>
-              <ul className="space-y-4 text-sm">
-                <li className="hover:text-blue-400 cursor-pointer transition-colors py-1 border-b border-neutral-800 last:border-b-0">
-                  🚀 Top herramientas de IA
-                </li>
-                <li className="hover:text-blue-400 cursor-pointer transition-colors py-1 border-b border-neutral-800 last:border-b-0">
-                  📊 Marketing con IA
-                </li>
-                <li className="hover:text-blue-400 cursor-pointer transition-colors py-1 border-b border-neutral-800 last:border-b-0">
-                  💡 Ideas de productividad
-                </li>
-                <li className="hover:text-blue-400 cursor-pointer transition-colors py-1 border-b border-neutral-800 last:border-b-0">
-                  🔥 Tendencias 2025
-                </li>
-              </ul>
-            </div>
-          </aside>
+         
         </div>
         <BottomNav></BottomNav>
         <Footer></Footer>
