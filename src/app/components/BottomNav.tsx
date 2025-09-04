@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Home, Search, Tag, Users, Sparkles,
+import { Home, Search, Users, Sparkles, QrCode
      //Layers
      } from "lucide-react";
 
@@ -26,11 +26,11 @@ export default function BottomNav() {
         </Link>
 
         <Link
-          href="/deals"
+          href="/generadorQR"
           className="flex flex-col items-center text-gray-400 hover:text-blue-400 transition"
         >
-          <Tag className="w-5 h-5" />
-          <span className="text-[11px]">Ofertas</span>
+          <QrCode className="w-5 h-5" />
+          <span className="text-[11px]">Generador QR</span>
         </Link>
 {/*
         <Link
