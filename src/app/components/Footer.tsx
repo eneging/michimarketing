@@ -1,6 +1,10 @@
 // app/components/Footer.tsx
 import Link from "next/link";
-import { Facebook, Twitter, Instagram, Mail } from "lucide-react";
+import { Facebook, 
+  
+// Twitter, 
+  
+  Instagram, Mail } from "lucide-react";
 
 export default function Footer() {
   return (
@@ -10,7 +14,7 @@ export default function Footer() {
         {/* Logo + Descripción */}
         <div>
           <h2 className="text-2xl font-extrabold text-white">MichiMarketing 🚀</h2>
-          <p className="mt-4 text-sm text-gray-400 leading-relaxed">
+          <p className="mt-4 text-sm text-green-400 leading-relaxed">
             El directorio donde encuentras las mejores herramientas de marketing digital & IA.
           </p>
         </div>
@@ -42,16 +46,17 @@ export default function Footer() {
         <div>
           <h3 className="text-lg font-semibold text-white mb-4">Síguenos</h3>
           <div className="flex space-x-4">
-            <a href="#" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-blue-600 transition-colors">
+            <a href="https://www.facebook.com/edward.lordmoe" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-blue-600 transition-colors">
               <Facebook className="w-5 h-5" />
             </a>
-            <a href="#" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-sky-500 transition-colors">
+        {/*   <a href="#" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-sky-500 transition-colors">
               <Twitter className="w-5 h-5" />
-            </a>
-            <a href="#" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-pink-500 transition-colors">
+            </a>*/}
+
+            <a href="https://www.instagram.com/edwar_rr/" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-pink-500 transition-colors">
               <Instagram className="w-5 h-5" />
             </a>
-            <a href="mailto:contacto@michimarketing.com" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-green-500 transition-colors">
+            <a href="mailto:edwarrejasreyes@gmail.com?subject=hola quiero saber mas sobre marketing&body=estoy listo" className="w-10 h-10 flex items-center justify-center rounded-full bg-gray-800 hover:bg-green-500 transition-colors">
               <Mail className="w-5 h-5" />
             </a>
           </div>
@@ -66,7 +71,7 @@ export default function Footer() {
       </div>*/}
 
       {/* Línea final */}
-      <div className="border-t border-gray-800 py-5 text-center text-sm text-gray-500">
+      <div className="border-t border-gray-800 py-5 text-center text-sm text-green-500">
         © {new Date().getFullYear()} <span className="font-semibold">MichiMarketing</span>. Todos los derechos reservados.
       </div>
     </footer>
