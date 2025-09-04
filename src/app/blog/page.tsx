@@ -65,17 +65,23 @@ async function BlogPosts() {
 
   try {
     const res = await fetch(`${API_URL}/api/blog-posts`, {
-  next: { revalidate: 3600 }, // se regenera cada hora
+  next: { tags: ['blog-posts'] }, // se regenera cada hora
 });
      if (!res.ok) {
       throw new Error('Fallo al obtener los datos de la API');
     }
+
+
+    
     const json = await res.json();
 console.log("Respuesta API:", json);
     blogPosts = Array.isArray(json?.data?.data) ? json.data.data : [];
   } catch (error) {
     console.error("Error cargando posts:", error);
     // ✅ **MEJORA UX: Muestra un error claro en la UI**
+
+
+
     return (
       <div className="text-center col-span-1 lg:col-span-3 py-12 bg-gray-900/50 rounded-2xl border border-red-500/30">
         <h3 className="text-2xl font-bold text-red-400">¡Oh, no! Algo salió mal</h3>

@@ -36,7 +36,12 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 async function getAllPosts(): Promise<BlogPost[]> {
   
   try {
-    const res = await fetch(`${API_URL}/api/blog-posts`, { next: { revalidate: 3600 } });
+    const res = await fetch(`${API_URL}/api/blog-posts`, { 
+
+
+next: { tags: ['blog-posts'] },
+
+    });
     if (!res.ok) return [];
     const json = await res.json();
 

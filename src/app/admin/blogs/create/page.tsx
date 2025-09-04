@@ -263,6 +263,7 @@ export default function CreateBlogPage() {
               name="slug"
               placeholder="Slug (url)"
               value={formData.slug}
+              
               onChange={handleChange}
               required
               className="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
@@ -321,7 +322,7 @@ export default function CreateBlogPage() {
                   <button
                     type="button"
                     onClick={() => open()}
-                    className="w-full py-2 px-4 rounded-lg bg-gray-800 border border-gray-700 text-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors"
+                    className="w-full py-2 px-4 rounded-lg bg-green-700 text-gray-100 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors"
                   >
                     Subir foto del autor
                   </button>
@@ -367,7 +368,7 @@ export default function CreateBlogPage() {
                   <button
                     type="button"
                     onClick={() => open()}
-                    className="w-full py-2 px-4 rounded-lg bg-gray-800 border border-gray-700 text-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors"
+                    className="w-full py-2 px-4 rounded-lg bg-green-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors"
                   >
                     Subir Imagen destacada
                   </button>

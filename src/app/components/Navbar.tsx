@@ -143,6 +143,7 @@ export default function Navbar() {
     { href: "/blog", label: "Blog" },
     //{ href: "/cursos", label: "Cursos" },
     { href: "/comunidad", label: "Comunidad" },
+    { href: "/generadorQR", label: "Generador QR" },
     { href: "/login", label: "login" },
   ];
 

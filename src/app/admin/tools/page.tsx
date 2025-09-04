@@ -137,7 +137,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL!;
   };
 
   return (
-    <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 bg-gray-900 text-white min-h-screen">
+    <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8  text-white min-h-screen">
       <div className="flex justify-between items-center mb-6 flex-wrap gap-4">
         <h1 className="text-3xl sm:text-4xl font-extrabold text-emerald-400">
           Gestión de Herramientas

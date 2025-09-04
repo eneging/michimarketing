@@ -326,23 +326,6 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 
 
 
-           {/* <div>
-              <label htmlFor="logo" className="block text-sm font-medium text-gray-400 mb-1">URL Logo</label>
-              <input
-                type="text"
-                id="logo"
-                name="logo"
-                value={formData.logo || ""}
-                onChange={handleChange}
-                className="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
-              />
-            </div>*/}
-
-
-
-
-
-
  <div>
               <label className="block text-sm font-medium text-gray-400 mb-1">
                 Logo de la Herramienta
@@ -357,7 +340,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL!;
                     <button
                       type="button"
                       onClick={() => open()}
-                      className="w-full py-2 px-4 rounded-lg bg-gray-800 border border-gray-700 text-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors"
+                      className="w-full py-2 px-4 rounded-lg bg-green-700 text-gray-100 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors"
                     >
                       Subir Logo
                     </button>
@@ -380,25 +363,6 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL!;
 
 
 
-
-
-
-    {/*}     <div>
-              <label htmlFor="image" className="block text-sm font-medium text-gray-400 mb-1">URL Imagen</label>
-              <input
-                type="text"
-                id="image"
-                name="image"
-                value={formData.image || ""}
-                onChange={handleChange}
-                className="w-full px-4 py-2 rounded-lg bg-gray-800 border border-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500"
-              />
-            </div> */}
-            
-
-
-
-
 <div>
   <label className="block text-sm font-medium text-gray-400 mb-1">
     Imagen Principal
@@ -412,7 +376,7 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL!;
         <button
           type="button"
           onClick={() => open()}
-          className="w-full py-2 px-4 rounded-lg bg-gray-800 border border-gray-700 text-gray-400 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors"
+          className="w-full py-2 px-4 rounded-lg bg-green-700 text-gray-100 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-colors"
         >
           Subir Imagen
         </button>
@@ -432,14 +396,6 @@ const API_URL = process.env.NEXT_PUBLIC_API_URL!;
     </div>
   )}
 </div>
-
-
-
-
-
-
-
-
 
 
 

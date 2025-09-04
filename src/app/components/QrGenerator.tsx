@@ -114,7 +114,7 @@ export default function QrGenerator() {
   ), [text, size, fgColor, bgColor, errorLevel]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-neutral-900 to-neutral-800 py-4 px-4 flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-12">
+    <div className="min-h-screen   py-4 px-4 flex flex-col lg:flex-row items-center justify-center gap-6 lg:gap-12">
       
       {/* Header móvil */}
       <div className="lg:hidden w-full text-center mb-2">
@@ -173,7 +173,7 @@ export default function QrGenerator() {
 
           {/* Contenido de pestañas */}
           {activeTab === "basic" ? (
-            <div className="w-full grid grid-cols-2 gap-4">
+            <div className="w-full grid lg:grid-cols-2   gap-4">
               {/* Selector de color QR */}
               <div>
                 <label htmlFor="qr-color" className="block text-sm font-medium text-gray-300 mb-2">
@@ -192,7 +192,7 @@ export default function QrGenerator() {
                     type="text"
                     value={fgColor}
                     onChange={(e) => setFgColor(e.target.value)}
-                    className="flex-1 px-3 py-2 rounded-lg bg-neutral-700 text-white border border-neutral-600 text-xs"
+                    className="flex-1 px-3 py-2 w-full rounded-lg bg-neutral-700 text-white border border-neutral-600 text-xs"
                     aria-label="Valor hexadecimal del color"
                   />
                 </div>
@@ -200,7 +200,7 @@ export default function QrGenerator() {
 
               {/* Selector de color de fondo */}
               <div>
-                <label htmlFor="bg-color" className="block text-sm font-medium text-gray-300 mb-2">
+                <label htmlFor="bg-color" className="block text-sm font-medium text-gray-300 mb-2 ">
                   Fondo
                 </label>
                 <div className="flex items-center gap-2">
@@ -216,7 +216,7 @@ export default function QrGenerator() {
                     type="text"
                     value={bgColor}
                     onChange={(e) => setBgColor(e.target.value)}
-                    className="flex-1 px-3 py-2 rounded-lg bg-neutral-700 text-white border border-neutral-600 text-xs"
+                    className="flex-1 px-3 py-2 w-full rounded-lg bg-neutral-700 text-white border border-neutral-600 text-xs"
                     aria-label="Valor hexadecimal del color de fondo"
                   />
                 </div>
