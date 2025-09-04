@@ -223,18 +223,7 @@ function ToolMainContent({ tool }: { tool: Tool }) {
             )}
 
 
-            {/*tool.community_links && tool.community_links.length > 0 && (
-              <div>
-                <h3 className="text-lg font-medium text-neutral-300">Community</h3>
-                <div className="flex flex-wrap gap-2 text-sm">
-                  {tool.community_links.map((link, idx) => (
-                    <Link key={idx} href={link} className="text-blue-400 hover:underline">
-                      Link {idx + 1}
-                    </Link>
-                  ))}
-                </div>
-            </div>
-            )*/}
+      
           </div>
         </section>
       )}

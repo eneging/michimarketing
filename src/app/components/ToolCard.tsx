@@ -154,7 +154,7 @@ const priceLabel = useMemo(() => {
   height={200}
 
             className="object-cover transition-transform duration-700 group-hover:scale-110"
-            priority={false}
+            priority={true}
             onError={() => setImageError(true)}
           />
         ) : (
