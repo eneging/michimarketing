@@ -52,7 +52,7 @@ export const metadata: Metadata = {
       "Descubre las mejores herramientas de inteligencia artificial, apps y software para 2025.",
     images: [
       {
-        url: "/og-image.png",
+        url: "/public/vercel.svg",
         width: 1200,
         height: 630,
         alt: "MichiMarketing Preview",

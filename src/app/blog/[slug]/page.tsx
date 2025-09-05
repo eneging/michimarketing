@@ -78,7 +78,7 @@ export async function generateMetadata({ params }: BlogPageProps): Promise<Metad
     openGraph: {
       title: post.title,
       description: post.excerpt,
-      url: `https://tusitio.com/blog/${post.slug}`,
+      url: `https://michimarketing.com/blog/${post.slug}`,
       type: "article",
       publishedTime: post.date,
       authors: [post.author],
