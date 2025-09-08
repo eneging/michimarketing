@@ -134,8 +134,8 @@ export default function Navbar() {
   // Definir enlaces principales y adicionales
   const mainLinks = [
     { href: "/", label: "Inicio", id: "home" },
-    { href: "/tools", label: "Todas las Herramientas", id: "tools" },
-     { href: "/blog", label: "Blog" },
+  { href: "/tools", label: "Todas las Herramientas", id: "tools" },
+  { href: "/blog", label: "Blog", id: "blog" }, // agregado
   //  { href: "/comparativas", label: "Comparativas", id: "comparativas" },
   ];
 
