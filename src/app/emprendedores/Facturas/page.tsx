@@ -3,20 +3,36 @@
 import { useState } from "react";
 import jsPDF from "jspdf";
 
+// Definimos el tipo de Item
+interface Item {
+  descripcion: string;
+  cantidad: number;
+  precio: number;
+}
+
 export default function Facturas() {
   const [cliente, setCliente] = useState("");
-  const [items, setItems] = useState([{ descripcion: "", cantidad: 1, precio: 0 }]);
+  const [items, setItems] = useState<Item[]>([
+    { descripcion: "", cantidad: 1, precio: 0 },
+  ]);
 
-  const agregarItem = () => setItems([...items, { descripcion: "", cantidad: 1, precio: 0 }]);
-  const actualizarItem = (index: number, field: string, value: any) => {
+  const agregarItem = () =>
+    setItems([...items, { descripcion: "", cantidad: 1, precio: 0 }]);
+
+  const actualizarItem = (
+    index: number,
+    field: keyof Item, // 👈 Solo acepta "descripcion" | "cantidad" | "precio"
+    value: string | number
+  ) => {
     const nuevosItems = [...items];
-    nuevosItems[index][field] = value;
+    nuevosItems[index][field] = value as never; // 👈 resolvemos la incompatibilidad
     setItems(nuevosItems);
   };
 
   const generarPDF = () => {
     const doc = new jsPDF();
     doc.text(`Factura para: ${cliente}`, 10, 10);
+
     items.forEach((item, i) => {
       doc.text(
         `${i + 1}. ${item.descripcion} - Cantidad: ${item.cantidad} - Precio: S/. ${item.precio}`,
@@ -24,12 +40,17 @@ export default function Facturas() {
         20 + i * 10
       );
     });
+
     doc.save("factura.pdf");
   };
 
   return (
     <div className="p-4 md:p-8 max-w-5xl mx-auto rounded-lg shadow-lg">
-      <h2 className="text-xl md:text-2xl font-bold mb-6 text-center md:text-left">Generador de Facturas PDF</h2>
+      <h2 className="text-xl md:text-2xl font-bold mb-6 text-center md:text-left">
+        Generador de Facturas PDF
+      </h2>
+
+      {/* Cliente */}
       <input
         type="text"
         placeholder="Nombre del cliente"
@@ -37,38 +58,43 @@ export default function Facturas() {
         onChange={(e) => setCliente(e.target.value)}
         className="border p-2 rounded-md w-full mb-4 focus:ring-2 focus:ring-blue-500"
       />
-      
-      {/* Contenedor de items */}
+
+      {/* Items */}
       <div className="space-y-4">
         {items.map((item, idx) => (
-          // Contenedor de cada fila de item
           <div key={idx} className="flex flex-col md:flex-row gap-4">
             <input
               type="text"
               placeholder="Descripción"
               value={item.descripcion}
-              onChange={(e) => actualizarItem(idx, "descripcion", e.target.value)}
+              onChange={(e) =>
+                actualizarItem(idx, "descripcion", e.target.value)
+              }
               className="border p-2 rounded-md w-full md:flex-1"
             />
             <input
               type="number"
               placeholder="Cantidad"
               value={item.cantidad}
-              onChange={(e) => actualizarItem(idx, "cantidad", Number(e.target.value))}
+              onChange={(e) =>
+                actualizarItem(idx, "cantidad", Number(e.target.value))
+              }
               className="border p-2 rounded-md w-full md:w-24 text-center"
             />
             <input
               type="number"
               placeholder="Precio"
               value={item.precio}
-              onChange={(e) => actualizarItem(idx, "precio", Number(e.target.value))}
+              onChange={(e) =>
+                actualizarItem(idx, "precio", Number(e.target.value))
+              }
               className="border p-2 rounded-md w-full md:w-32 text-center"
             />
           </div>
         ))}
       </div>
 
-      {/* Contenedor de botones */}
+      {/* Botones */}
       <div className="flex flex-col md:flex-row gap-2 mt-6">
         <button
           onClick={agregarItem}
