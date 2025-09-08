@@ -4,7 +4,7 @@ import Facturas from "../emprendedores/Facturas/page";
 import CalculadoraPrecio from "../emprendedores/CalculadoraPrecio/page";
 import Plantillas from "../emprendedores/Plantillas/page";
 //import ROI from "../emprendedores/ROI/page";
-import SimuladorFinanciero from "../emprendedores/SimuladorFinanciero/page";
+
 import GestorTareas from "../emprendedores/GestorTareas/page";
 
 interface ToolContainerProps {
@@ -21,8 +21,7 @@ export default function ToolContainer({ activeTool }: ToolContainerProps) {
       return <Plantillas />;
    // case "ROI":
      // return <ROI />;
-    case "Simulador Financiero":
-      return <SimuladorFinanciero />;
+  
     case "Gestor Tareas":
       return <GestorTareas />;
     default:
