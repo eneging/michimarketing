@@ -7,24 +7,38 @@ import {
   login as loginService,
   logout as logoutService,
   saveAuth,
+  fetchWithAuth,
 } from "@/services/authService";
 
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  role: "free" | "registered" | "premium" | "admin";
+  downloads_today?: number;
+  last_download_at?: string;
+}
+
 interface AuthContextType {
-  user: any | null;
+  user: User | null;
   token: string | null;
   isAuthenticated: boolean;
+  isAdmin: boolean;
+  isPremium: boolean;
+  isFree: boolean;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
+  refreshUser: () => Promise<void>;
+  downloadProduct: (productId: number) => Promise<string | null>; // retorna URL si todo ok
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<any | null>(null);
+  const [user, setUser] = useState<User | null>(null);
   const [token, setToken] = useState<string | null>(null);
 
   useEffect(() => {
-    // ✅ Solo ejecutamos en cliente
     if (typeof window !== "undefined") {
       const storedToken = getToken();
       const storedUser = getUser();
@@ -50,9 +64,65 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     setUser(null);
   };
 
+  // 🔄 Refrescar datos de usuario desde backend
+  const refreshUser = async () => {
+    try {
+      const res = await fetchWithAuth("/api/me"); // debes crear este endpoint en Laravel
+      if (res.ok) {
+        const data = await res.json();
+        saveAuth(token!, data.user);
+        setUser(data.user);
+      }
+    } catch (e) {
+      console.error("Error al refrescar usuario", e);
+    }
+  };
+
+  // ⬇️ Descargar producto (y actualizar contador en el front)
+  const downloadProduct = async (productId: number): Promise<string | null> => {
+    try {
+      const res = await fetchWithAuth(`/api/products/${productId}/download`, {
+        method: "POST",
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        throw new Error(data.message || "No se pudo descargar");
+      }
+
+      // actualizamos contador en el estado
+      if (user) {
+        const updatedUser = {
+          ...user,
+          downloads_today: data.downloads_today,
+          last_download_at: data.last_download_at,
+        };
+        saveAuth(token!, updatedUser);
+        setUser(updatedUser);
+      }
+
+      return data.download_url; // URL firmada de S3 o storage
+    } catch (e) {
+      console.error(e);
+      return null;
+    }
+  };
+
   return (
     <AuthContext.Provider
-      value={{ user, token, isAuthenticated: !!token, login, logout }}
+      value={{
+        user,
+        token,
+        isAuthenticated: !!token,
+        isAdmin: user?.role === "admin",
+        isPremium: user?.role === "premium",
+        isFree: user?.role === "free",
+        login,
+        logout,
+        refreshUser,
+        downloadProduct,
+      }}
     >
       {children}
     </AuthContext.Provider>

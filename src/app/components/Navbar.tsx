@@ -135,13 +135,14 @@ export default function Navbar() {
   const mainLinks = [
     { href: "/", label: "Inicio", id: "home" },
     { href: "/tools", label: "Todas las Herramientas", id: "tools" },
+     { href: "/blog", label: "Blog" },
   //  { href: "/comparativas", label: "Comparativas", id: "comparativas" },
   ];
 
   const additionalLinks = [
    // { href: "/deals", label: "Ofertas" },
-    { href: "/blog", label: "Blog" },
-    //{ href: "/cursos", label: "Cursos" },
+   
+    { href: "/cursos", label: "Cursos" },
     { href: "/comunidad", label: "Comunidad" },
     { href: "/generadorQR", label: "Generador QR" },
     { href: "/login", label: "login" },

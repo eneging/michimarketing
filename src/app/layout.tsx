@@ -86,6 +86,8 @@ export default function RootLayout({
           name="google-adsense-account"
           content="ca-pub-9559644099127130"
         ></meta>
+
+        <meta name="google-site-verification" content="4sqJ9_7alGwA2JLhpC2sHDDfTjpd9IlZS4dxfdQU5gk" />
         <script
           async
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9559644099127130"
