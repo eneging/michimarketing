@@ -7,6 +7,7 @@ import { Wrench, LayoutGrid, Users } from "lucide-react";
 
 import { AuthProvider } from "../context/AuthContext";
 import { useEffect, useState } from "react";
+import AdminProducts from "./products/page";
 
 interface Category {
   id: number;
@@ -73,6 +74,7 @@ useEffect(() => {
         title="Panel de Administración"
         subtitle="Aquí podrás gestionar herramientas, categorías y usuarios."
       />
+      <AdminProducts></AdminProducts>
 
       {/* Grid de Estadísticas */}
      <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
