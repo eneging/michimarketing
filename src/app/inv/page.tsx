@@ -1,28 +1,20 @@
 "use client";
-
 import { useState, useEffect, useRef } from "react";
-import type { NextPage } from "next";
 import Image from "next/image";
-import { Nunito } from "next/font/google";
 import confetti from "canvas-confetti";
 
-const nunito = Nunito({
-  subsets: ["latin"],
-  weight: ["400", "700", "800"],
-});
-
-const InvitationPage: NextPage = () => {
-  const [isMobile, setIsMobile] = useState<boolean>(false);
-  const [showModal, setShowModal] = useState<boolean>(false);
-  const [isFleeing, setIsFleeing] = useState<boolean>(false);
-  const [noPosition, setNoPosition] = useState<{ top: number; left: number }>({
-    top: 0,
-    left: 0,
-  });
+export default function InvitationPage() {
+  const [isMobile, setIsMobile] = useState(false);
+  const [showModal, setShowModal] = useState(false);
+  const [isFleeing, setIsFleeing] = useState(false);
+  const [noPosition, setNoPosition] = useState({ top: 0, left: 0 });
+  const [yesScale, setYesScale] = useState(1);
 
   const videoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
-  const hasPlayedAudio = useRef<boolean>(false); // evita que se repita
+  const hoverSound = useRef<HTMLAudioElement | null>(null);
+  const clickSound = useRef<HTMLAudioElement | null>(null);
+  const hasPlayedAudio = useRef(false);
 
   useEffect(() => {
     const checkDevice = () => setIsMobile(window.innerWidth < 768);
@@ -31,7 +23,13 @@ const InvitationPage: NextPage = () => {
     return () => window.removeEventListener("resize", checkDevice);
   }, []);
 
-  // 🔊 Reproduce música 1 sola vez al entrar o al primer clic
+  // Inicializa sonidos
+  useEffect(() => {
+    hoverSound.current = new Audio("/music/uh-oh.mp3");
+    clickSound.current = new Audio("/music/pop.mp3");
+  }, []);
+
+  // Reproduce música principal al entrar o al primer clic
   useEffect(() => {
     const playMusic = () => {
       if (!hasPlayedAudio.current && audioRef.current) {
@@ -41,98 +39,69 @@ const InvitationPage: NextPage = () => {
         window.removeEventListener("click", playMusic);
       }
     };
-
-    // intenta reproducir apenas carga
     playMusic();
-    // si falla (por bloqueo del navegador), espera el primer clic
     window.addEventListener("click", playMusic);
-
     return () => window.removeEventListener("click", playMusic);
   }, []);
 
   const handleNoMouseOver = () => {
-    if (!isFleeing) setIsFleeing(true);
+    setIsFleeing(true);
+    setYesScale((prev) => Math.min(prev + 0.08, 2)); // crece sin volver atrás
     const x = Math.random() * (window.innerWidth - 150);
     const y = Math.random() * (window.innerHeight - 100);
     setNoPosition({ top: y, left: x });
-  };
 
- const handleYesClick = () => {
-  setShowModal(true);
-
-  // 🎉 Confeti
-  const duration = 2 * 1000;
-  const end = Date.now() + duration;
-  const frame = () => {
-    confetti({ particleCount: 7, angle: 60, spread: 55, origin: { x: 0 } });
-    confetti({ particleCount: 7, angle: 120, spread: 55, origin: { x: 1 } });
-    if (Date.now() < end) requestAnimationFrame(frame);
-  };
-  frame();
-
-  // 🎬 Reproducir video con sonido y efecto fade-in
-  setTimeout(() => {
-    if (videoRef.current) {
-      const video = videoRef.current;
-      video.muted = false;
-      video.volume = 0; // empieza en silencio
-      video.play().catch(() => {});
-
-      // 🎵 Efecto fade-up suave (2 segundos)
-      const fadeDuration = 2000;
-      const steps = 20;
-      const stepTime = fadeDuration / steps;
-      let currentStep = 0;
-
-      const fadeInterval = setInterval(() => {
-        currentStep++;
-        video.volume = Math.min(currentStep / steps, 1);
-        if (currentStep >= steps) clearInterval(fadeInterval);
-      }, stepTime);
+    if (hoverSound.current) {
+      hoverSound.current.currentTime = 0;
+      hoverSound.current.play().catch(() => {});
     }
-  }, 500);
-};
+  };
 
+  const handleYesClick = () => {
+    setShowModal(true);
+    confetti({ particleCount: 150, spread: 70 });
+    if (clickSound.current) clickSound.current.play().catch(() => {});
+
+    setTimeout(() => {
+      if (videoRef.current) {
+        const video = videoRef.current;
+        video.muted = false;
+        video.volume = 0;
+        video.play().catch(() => {});
+        const fadeDuration = 2000;
+        const steps = 20;
+        const stepTime = fadeDuration / steps;
+        let currentStep = 0;
+        const fadeInterval = setInterval(() => {
+          currentStep++;
+          video.volume = Math.min(currentStep / steps, 1);
+          if (currentStep >= steps) clearInterval(fadeInterval);
+        }, stepTime);
+      }
+    }, 500);
+  };
 
   if (isMobile) {
     return (
-      <div className={`mobile-warning ${nunito.className}`}>
-     <h1>🍓 ¡Hey!</h1>
-<p>Parece que este contenido no se adapta bien al celular 📱</p>
-<p>Prueba abrirlo en tu computadora 💻 para disfrutarlo mejor ✨</p>
-
-        <style jsx>{`
-          .mobile-warning {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            text-align: center;
-            background: linear-gradient(135deg, #ffdde1, #ee9ca7);
-            color: #fff;
-            padding: 20px;
-          }
-          h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-          }
-          p {
-            font-size: 1.2rem;
-          }
-        `}</style>
+      <div className="flex flex-col justify-center items-center h-screen text-center bg-gradient-to-br from-pink-200 to-rose-300 text-white p-6">
+        <h1 className="text-4xl font-extrabold mb-4">🍓 ¡Hey!</h1>
+        <p className="text-lg mb-2">
+          Parece que este contenido no se adapta bien al celular 📱
+        </p>
+        <p>Prueba abrirlo en tu computadora 💻 para disfrutarlo mejor ✨</p>
       </div>
     );
   }
 
   return (
-    <div className={`container ${nunito.className}`}>
-      {/* 🎵 Música (se reproduce solo una vez) */}
-      <audio ref={audioRef} src="/audio/song.mp3" preload="auto" />
+    <div className="invitation-container">
+      {/* 🎵 Música de fondo */}
+      <audio ref={audioRef} src="/music/song.mp3" preload="auto" />
 
+      {/* 🍓 Fondo con patrón de fresas */}
       <div className="background-pattern" />
 
-      {/* 📸 Polaroid aesthetic */}
+      {/* 📸 Foto polaroid */}
       <div className="polaroid">
         <Image
           src="/images/anette.jpg"
@@ -144,30 +113,32 @@ const InvitationPage: NextPage = () => {
         <div className="caption">🍓 Anette 🍓</div>
       </div>
 
-      <h1>Anette, ¿quieres ir a La Rosa y el Clavel conmigo? 🌹</h1>
+      <h1 className="title">Anette, ¿quieres ir a La Rosa y el Clavel conmigo? 🌹</h1>
 
       <div className="buttons">
-        <button id="yes" onClick={handleYesClick}>
-          ¡Sí, obvio!
+        <button
+          id="yes"
+          onClick={handleYesClick}
+          style={{
+            transform: `scale(${yesScale})`,
+          }}
+        >
+          ¡Sí, obvio! 
         </button>
         <button
           id="no"
           onMouseOver={handleNoMouseOver}
-          style={
-            isFleeing
-              ? {
-                  position: "absolute",
-                  top: `${noPosition.top}px`,
-                  left: `${noPosition.left}px`,
-                }
-              : { position: "static" }
-          }
+          style={{
+            position: isFleeing ? "absolute" : "static",
+            top: isFleeing ? `${noPosition.top}px` : "auto",
+            left: isFleeing ? `${noPosition.left}px` : "auto",
+          }}
         >
           No 😅
         </button>
       </div>
 
-      {/* 💖 Modal con video de fondo */}
+      {/* 💞 Modal final */}
       {showModal && (
         <div className="modal-overlay">
           <video
@@ -186,7 +157,7 @@ const InvitationPage: NextPage = () => {
             <span className="final-text">
               Espero verte con tu vestido verde de manzanita 🍏💚  
               <br />
-              Hace tiempo quería mandarlo, pero estaba programándolo jajaj 😅
+              (queria enviarlo antes pero demore un poquito haciendolo😅)
             </span>
           </div>
         </div>
@@ -194,9 +165,12 @@ const InvitationPage: NextPage = () => {
 
       {/* 🎨 Estilos */}
       <style jsx>{`
-        .container {
-          position: relative;
+        .invitation-container {
+          position: fixed;
+          inset: 0;
+          z-index: 9999;
           height: 100vh;
+          width: 100vw;
           display: flex;
           flex-direction: column;
           justify-content: center;
@@ -208,20 +182,24 @@ const InvitationPage: NextPage = () => {
         .background-pattern {
           background-image: url("/images/strawberry-pattern.png");
           background-repeat: repeat;
-          background-size: 180px;
-          opacity: 0.15;
+          background-size: 250px auto;
+          background-position: center center;
+          opacity: 0.18;
           position: absolute;
           inset: 0;
           z-index: 0;
-          animation: floatPattern 15s linear infinite alternate;
+          animation: floatPattern 20s ease-in-out infinite alternate;
+          transform: scale(1.05);
         }
 
         @keyframes floatPattern {
           from {
-            background-position: 0 0;
+            background-position: center center;
+            transform: scale(1.05);
           }
           to {
-            background-position: 100px 80px;
+            background-position: calc(50% + 60px) calc(50% + 40px);
+            transform: scale(1.1);
           }
         }
 
@@ -249,7 +227,7 @@ const InvitationPage: NextPage = () => {
           color: #d63384;
         }
 
-        h1 {
+        .title {
           font-size: 2.4em;
           font-weight: 800;
           text-align: center;
@@ -282,6 +260,7 @@ const InvitationPage: NextPage = () => {
           background: linear-gradient(135deg, #ff9a9e, #fecfef);
           color: #fff;
         }
+
         #yes:hover {
           transform: scale(1.1);
           box-shadow: 0 0 20px rgba(255, 153, 204, 0.5);
@@ -292,7 +271,6 @@ const InvitationPage: NextPage = () => {
           color: white;
         }
 
-        /* 🌸 Modal */
         .modal-overlay {
           position: fixed;
           inset: 0;
@@ -350,6 +328,4 @@ const InvitationPage: NextPage = () => {
       `}</style>
     </div>
   );
-};
-
-export default InvitationPage;
+}
