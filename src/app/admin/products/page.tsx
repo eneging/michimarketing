@@ -1,10 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import { AuthProvider, useAuth } from "../../context/AuthContext"; // importa tu AuthProvider
+import { AuthProvider, useAuth } from "../../context/AuthContext";
 import { fetchWithAuth } from "@/services/authService";
 
-export default function AdminProducts() {
+export const dynamic = 'force-dynamic';
+
+function AdminProductsContent() {
   const { token, isAuthenticated } = useAuth(); // ✅ usar el contexto
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -77,7 +79,6 @@ export default function AdminProducts() {
   };
 
   return (
-     <AuthProvider>
     <div className="max-w-3xl mx-auto p-6">
       <h1 className="text-2xl font-bold mb-6">📦 Crear Producto</h1>
 
@@ -184,6 +185,13 @@ export default function AdminProducts() {
         </button>
       </form>
     </div>
+  );
+}
+
+export default function AdminProducts() {
+  return (
+    <AuthProvider>
+      <AdminProductsContent />
     </AuthProvider>
   );
 }

@@ -9,6 +9,8 @@ import { AuthProvider } from "../context/AuthContext";
 import { useEffect, useState } from "react";
 import AdminProducts from "./products/page";
 
+export const dynamic = 'force-dynamic';
+
 interface Category {
   id: number;
   name: string;
