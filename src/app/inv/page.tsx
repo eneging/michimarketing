@@ -10,10 +10,10 @@ export default function InvitationPage() {
   const [noPosition, setNoPosition] = useState({ top: 0, left: 0 });
   const [yesScale, setYesScale] = useState(1);
 
-  const videoRef = useRef<HTMLVideoElement>(null);
-  const audioRef = useRef<HTMLAudioElement>(null);
-  const hoverSound = useRef<HTMLAudioElement | null>(null);
-  const clickSound = useRef<HTMLAudioElement | null>(null);
+  const videoRef = useRef < HTMLVideoElement > (null);
+  const audioRef = useRef < HTMLAudioElement > (null);
+  const hoverSound = useRef < HTMLAudioElement | null > (null);
+  const clickSound = useRef < HTMLAudioElement | null > (null);
   const hasPlayedAudio = useRef(false);
 
   useEffect(() => {
@@ -113,7 +113,9 @@ export default function InvitationPage() {
         <div className="caption">🍓 Anette 🍓</div>
       </div>
 
-      <h1 className="title">Anette, ¿quieres ir a La Rosa y el Clavel conmigo? 🌹</h1>
+      <h1 className="title">
+        Anette, ¿quieres ir a La Rosa y el Clavel conmigo? 🌹
+      </h1>
 
       <div className="buttons">
         <button
@@ -123,7 +125,7 @@ export default function InvitationPage() {
             transform: `scale(${yesScale})`,
           }}
         >
-          ¡Sí, obvio! 
+          ¡Sí, obvio!
         </button>
         <button
           id="no"
@@ -149,16 +151,26 @@ export default function InvitationPage() {
             className="video-bg"
           />
           <div className="modal-content">
-            🎉 ¡Sabía que dirías que sí! 💃  
+            🎉 ¡Sabía que dirías que sí! 💃
             <br />
-            Nos vemos en <b>La Rosa y el Clavel</b> 💐  
+            Nos vemos en <b>La Rosa y el Clavel</b> 💐
             <br />
             <br />
             <span className="final-text">
-              Espero verte con tu vestido verde de manzanita 🍏💚  
+              Espero verte con tu vestido verde de manzanita 🍏💚
               <br />
               (queria enviarlo antes pero demore un poquito haciendolo😅)
             </span>
+            
+            {/* --- BOTÓN DE WHATSAPP --- */}
+            <a
+              href="https://wa.me/51932563713?text=¡Claro%20que%20quiero%20ir%20contigo%20a%20La%20Rosa%20y%20el%20Clavel!%20🌹"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="whatsapp-button"
+            >
+              Confirma por whats xq tengo tdh 💬
+            </a>
           </div>
         </div>
       )}
@@ -313,6 +325,25 @@ export default function InvitationPage() {
           color: #a64d79;
           display: block;
           margin-top: 20px;
+        }
+
+        .whatsapp-button {
+          display: inline-block;
+          background-color: #25d366;
+          color: white;
+          padding: 12px 24px;
+          border-radius: 12px;
+          text-decoration: none;
+          font-size: 1.1em;
+          font-weight: 700;
+          margin-top: 25px;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .whatsapp-button:hover {
+          transform: scale(1.05);
+          box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
         }
 
         @keyframes fadeIn {
