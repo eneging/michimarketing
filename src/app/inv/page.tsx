@@ -97,9 +97,10 @@ const InvitationPage: NextPage = () => {
   if (isMobile) {
     return (
       <div className={`mobile-warning ${nunito.className}`}>
-        <h1>🍓 ¡Ups!</h1>
-        <p>Esta invitación tan linda solo se puede ver desde tu compu 💻</p>
-        <p>¡Ábrela ahí para ver toda la magia! ✨</p>
+     <h1>🍓 ¡Hey!</h1>
+<p>Parece que este contenido no se adapta bien al celular 📱</p>
+<p>Prueba abrirlo en tu computadora 💻 para disfrutarlo mejor ✨</p>
+
         <style jsx>{`
           .mobile-warning {
             display: flex;
